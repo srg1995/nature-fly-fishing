@@ -3,20 +3,40 @@
 :root {
   --background: #f8fbfa;
   --foreground: #0e1a13;
+
+  --color-primary: #0e1a13;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #e8f2ec;
+  --color-secondary-foreground: #ffffff;
+
+  --color-tertiary: #51946c;
+  --color-tertiary-foreground: #0a0a0a;
+
+  --color-accent: #38e07b;
+  --color-accent-foreground: #0a0a0a;
+
+  --checkbox-tick-svg: url("/next.svg");
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+
+  --color-tertiary: var(--color-tertiary);
+  --color-tertiary-foreground: var(--color-tertiary-foreground);
+
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000a06f4;
-    --foreground: #ededed;
-  }
 }
 
 body {
