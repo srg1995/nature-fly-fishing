@@ -1,6 +1,10 @@
 import React from "react";
+import { supabase } from "../lib/supabaseClient";
+import Image from "next/image";
 
-const Articles = () => {
+const Articles = async () => {
+  const { data: products } = await supabase.from("products").select("*");
+
   return (
     <div className="layout-container flex h-full grow flex-col">
       <div className="flex flex-1 justify-center gap-1 px-6 py-5">
@@ -118,40 +122,35 @@ const Articles = () => {
               </select>
             </label>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
-            <div className="flex flex-col gap-3 pb-3">
-              <div className="aspect-[3/4] w-full rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat"></div>
-              <div>
-                <p className="text-primary text-base leading-normal font-medium">
-                  Mosca Seca Clásica
-                </p>
-                <p className="text-secondary text-sm leading-normal font-normal">
-                  Mosca seca para truchas y salmones
-                </p>
+          <div className="grid [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))] gap-6">
+            {products?.map((product) => (
+              <div
+                key={product.id}
+                className="group relative cursor-pointer overflow-hidden rounded-xl shadow-lg"
+              >
+                {/* Imagen */}
+                <Image
+                  width={220}
+                  height={220}
+                  src="/images/bg-header.png"
+                  alt="Mosca Adams"
+                  className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:blur-sm"
+                />
+
+                {/* Capa con texto */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 p-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
+                  <h3 className="mb-2 text-center text-xl font-semibold text-white">
+                    {product.description}
+                  </h3>
+                  <p className="px-4 text-center text-sm text-gray-200">
+                    {product.description}
+                  </p>
+                  <p className="text-tertiary text-xl leading-normal font-bold">
+                    {product.price} €
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col gap-3 pb-3">
-              <div className="aspect-[3/4] w-full rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat"></div>
-              <div>
-                <p className="text-primary text-base leading-normal font-medium">
-                  Ninfa de Perdigón
-                </p>
-                <p className="text-secondary text-sm leading-normal font-normal">
-                  Ninfa para pesca en ríos de corriente
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 pb-3">
-              <div className="aspect-[3/4] w-full rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat"></div>
-              <div>
-                <p className="text-primary text-base leading-normal font-medium">
-                  Ahogada de Pluma
-                </p>
-                <p className="text-secondary text-sm leading-normal font-normal">
-                  Ahogada para pesca en lagos y embalses
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="flex items-center justify-center p-4">
             <a href="#" className="flex size-10 items-center justify-center">
