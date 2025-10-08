@@ -1,7 +1,7 @@
 import Link from "next/link";
-import React from "react";
+import React, { JSX } from "react";
 
-const Menu: React.FC = () => {
+export default function Menu(): JSX.Element {
   return (
     <header className="border-b-secondary flex items-center justify-between border-b border-solid px-10 py-3 whitespace-nowrap">
       <div className="text-primary flex items-center gap-4">
@@ -34,7 +34,7 @@ const Menu: React.FC = () => {
           </Link>
           <Link
             className="text-primary hover:text-tertiary text-sm leading-normal font-bold transition hover:scale-105"
-            href="articles"
+            href="products"
           >
             Tienda
           </Link>
@@ -81,6 +81,4 @@ const Menu: React.FC = () => {
       </div>
     </header>
   );
-};
-
-export default Menu;
+}

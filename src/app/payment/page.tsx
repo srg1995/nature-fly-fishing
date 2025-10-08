@@ -1,6 +1,6 @@
-import React from "react";
+import React, { JSX } from "react";
 
-const Payment = () => {
+export default function Payment(): JSX.Element {
   return (
     <div className="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
@@ -167,6 +167,4 @@ const Payment = () => {
       </div>
     </div>
   );
-};
-
-export default Payment;
+}

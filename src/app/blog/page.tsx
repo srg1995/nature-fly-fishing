@@ -1,6 +1,6 @@
-import React from "react";
+import React, { JSX } from "react";
 
-const Blog = () => {
+export default function Blog(): JSX.Element {
   return (
     <div className="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
       <div className="layout-container flex h-full grow flex-col">
@@ -187,6 +187,4 @@ const Blog = () => {
       </div>
     </div>
   );
-};
-
-export default Blog;
+}

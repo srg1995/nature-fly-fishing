@@ -1,9 +1,10 @@
-import React from "react";
-import { supabase } from "../lib/supabaseClient";
-import Image from "next/image";
+import React, { JSX, Suspense, use } from "react";
+import { getProducts } from "../services/products";
+import Skeleton from "../components/Skeleton";
+import Items from "../components/Items";
 
-const Articles = async () => {
-  const { data: products } = await supabase.from("products").select("*");
+export default function Articles(): JSX.Element {
+  const products = use(getProducts());
 
   return (
     <div className="layout-container flex h-full grow flex-col">
@@ -122,36 +123,10 @@ const Articles = async () => {
               </select>
             </label>
           </div>
-          <div className="grid [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))] gap-6">
-            {products?.map((product) => (
-              <div
-                key={product.id}
-                className="group relative cursor-pointer overflow-hidden rounded-xl shadow-lg"
-              >
-                {/* Imagen */}
-                <Image
-                  width={220}
-                  height={220}
-                  src="/images/bg-header.png"
-                  alt="Mosca Adams"
-                  className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:blur-sm"
-                />
 
-                {/* Capa con texto */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 p-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
-                  <h3 className="mb-2 text-center text-xl font-semibold text-white">
-                    {product.description}
-                  </h3>
-                  <p className="px-4 text-center text-sm text-gray-200">
-                    {product.description}
-                  </p>
-                  <p className="text-tertiary text-xl leading-normal font-bold">
-                    {product.price} €
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Suspense fallback={<Skeleton />}>
+            <Items data={products} />
+          </Suspense>
           <div className="flex items-center justify-center p-4">
             <a href="#" className="flex size-10 items-center justify-center">
               <div
@@ -221,8 +196,4 @@ const Articles = async () => {
       </div>
     </div>
   );
-};
-
-Articles.propTypes = {};
-
-export default Articles;
+}

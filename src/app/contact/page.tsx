@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 
-const Contact = () => {
+export default function Contact(): JSX.Element {
   const [form, setForm] = useState({
     name: "",
     subject: "",
@@ -101,6 +101,4 @@ const Contact = () => {
       </div>
     </div>
   );
-};
-
-export default Contact;
+}
