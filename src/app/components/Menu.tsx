@@ -1,5 +1,7 @@
-import Link from "next/link";
 import React, { JSX } from "react";
+import ButtonSecondary from "./ButtonSecondary";
+import LinkPrimary from "./LinkPrimary";
+import LinkButton from "./LinkButton";
 
 export default function Menu(): JSX.Element {
   return (
@@ -17,49 +19,19 @@ export default function Menu(): JSX.Element {
             ></path>
           </svg>
         </div>
-        <Link
-          href="/"
-          className="text-primary text-lg leading-tight font-bold tracking-[-0.015em]"
-        >
-          Nature Fly Fishing
-        </Link>
+        <LinkPrimary href="/" text="Nature Fly Fishing" />
       </div>
       <div className="flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
-          <Link
-            className="text-primary hover:text-tertiary text-sm leading-normal font-bold transition hover:scale-105"
-            href="/"
-          >
-            Inicio
-          </Link>
-          <Link
-            className="text-primary hover:text-tertiary text-sm leading-normal font-bold transition hover:scale-105"
-            href="products"
-          >
-            Tienda
-          </Link>
-          <Link
-            className="text-primary hover:text-tertiary text-sm leading-normal font-bold transition hover:scale-105"
-            href="blog"
-          >
-            Blog
-          </Link>
-          <Link
-            className="text-primary hover:text-tertiary text-sm leading-normal font-bold transition hover:scale-105"
-            href="contact"
-          >
-            Contacto
-          </Link>
+          <LinkPrimary href="/" text="Inicio" />
+          <LinkPrimary href="products" text="Tienda" />
+          <LinkPrimary href="blog" text="Blog" />
+          <LinkPrimary href="contact" text="Contacto" />
         </div>
         <div className="flex gap-2">
-          <button className="bg-secondary hover:bg-accent text-primary flex h-10 max-w-[480px] min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg px-4 text-sm leading-normal font-bold tracking-[0.015em] transition hover:scale-105">
-            <span className="truncate">Iniciar sesión</span>
-          </button>
+          <ButtonSecondary text="Iniciar sesión" />
 
-          <Link
-            href="payment"
-            className="bg-secondary hover:bg-accent text-primary flex h-10 max-w-[480px] min-w-0 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg px-2.5 text-sm leading-normal font-bold tracking-[0.015em] transition hover:scale-105"
-          >
+          <LinkButton href="payment">
             <div
               className="text-primary"
               data-icon="ShoppingBag"
@@ -76,7 +48,7 @@ export default function Menu(): JSX.Element {
                 <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,160H40V56H216V200ZM176,88a48,48,0,0,1-96,0,8,8,0,0,1,16,0,32,32,0,0,0,64,0,8,8,0,0,1,16,0Z"></path>
               </svg>
             </div>
-          </Link>
+          </LinkButton>
         </div>
       </div>
     </header>
