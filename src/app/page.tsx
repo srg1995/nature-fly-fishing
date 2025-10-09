@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { JSX } from "react";
+import ButtonPrimary from "./components/ButtonPrimary";
+import ButtonSecondary from "./components/ButtonSecondary";
 
 export default function Home(): JSX.Element {
   return (
@@ -86,9 +88,7 @@ export default function Home(): JSX.Element {
                       perfectas para atraer a una variedad de peces.
                     </p>
                   </div>
-                  <button className="text-primary bg-secondary flex h-8 w-fit max-w-[480px] min-w-[84px] cursor-pointer flex-row-reverse items-center justify-center overflow-hidden rounded-lg px-4 text-sm leading-normal font-medium">
-                    <span className="truncate">Ver colección</span>
-                  </button>
+                  <ButtonPrimary text="Ver colección" />
                 </div>
                 <div className='aspect-video w-full flex-1 rounded-lg bg-[url("/images/fly.png")] bg-cover bg-center bg-no-repeat'></div>
               </div>
@@ -108,9 +108,7 @@ export default function Home(): JSX.Element {
                       el equipo esencial hasta las técnicas de lanzamiento.
                     </p>
                   </div>
-                  <button className="text-primary bg-secondary flex h-8 w-fit max-w-[480px] min-w-[84px] cursor-pointer flex-row-reverse items-center justify-center overflow-hidden rounded-lg px-4 text-sm leading-normal font-medium">
-                    <span className="truncate">Leer artículo</span>
-                  </button>
+                  <ButtonSecondary text="Leer artículo" />
                 </div>
                 <div className='aspect-video w-full flex-1 rounded-lg bg-[url("/images/fly.png")] bg-cover bg-center bg-no-repeat'></div>
               </div>

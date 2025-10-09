@@ -1,11 +1,15 @@
 import React, { JSX, Suspense, use } from "react";
 import { getProducts } from "../services/products";
-import Skeleton from "../components/Skeleton";
-import Items from "../components/Items";
+import Skeleton from "./components/Skeleton";
+import Items from "./components/Items";
+import Input from "../components/Input";
+import PriceRange from "../components/PriceRange";
+import Badge from "../components/Badge";
+import Select from "../components/Select";
 
 export default function Articles(): JSX.Element {
   const products = use(getProducts());
-
+  const options = ["Más relevantes", "Menor precio", "Mayor precio"];
   return (
     <div className="layout-container flex h-full grow flex-col">
       <div className="flex flex-1 justify-center gap-1 px-6 py-5">
@@ -16,94 +20,29 @@ export default function Articles(): JSX.Element {
           <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
             Tipo de Mosca
           </h3>
-          <div className="px-4">
-            <label className="flex flex-row gap-x-3 py-3">
-              <input
-                type="checkbox"
-                className="border-secondary text-accent checked:border-accent checked:bg-accent focus:border-secondary h-5 w-5 appearance-none rounded border-2 bg-transparent checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:outline-none"
-              />
-              <p className="text-primary text-base leading-normal font-normal">
-                Efímeras
-              </p>
-            </label>
-            <label className="flex flex-row gap-x-3 py-3">
-              <input
-                type="checkbox"
-                className="border-secondary text-accent checked:border-accent checked:bg-accent focus:border-secondary h-5 w-5 rounded border-2 bg-transparent checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:outline-none"
-              />
-              <p className="text-primary text-base leading-normal font-normal">
-                Perdigones
-              </p>
-            </label>
-            <label className="flex flex-row gap-x-3 py-3">
-              <input
-                type="checkbox"
-                className="border-secondary text-accent checked:border-accent checked:bg-accent focus:border-secondary h-5 w-5 rounded border-2 bg-transparent checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:outline-none"
-              />
-
-              <p className="text-primary text-base leading-normal font-normal">
-                Ninfas
-              </p>
-            </label>
+          <div className="flex flex-col gap-2 px-4">
+            <Input text="Efemeras" />
+            <Input text="Perdigones" />
+            <Input text="Ninfas" />
           </div>
           <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
             Tamaño
           </h3>
           <div className="flex flex-wrap gap-3 p-3 pr-4">
-            <div className="bg-secondary flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pr-4 pl-4 transition hover:scale-105">
-              <p className="text-primary text-sm leading-normal font-medium">
-                #12
-              </p>
-            </div>
-            <div className="bg-secondary flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pr-4 pl-4 transition hover:scale-105">
-              <p className="text-primary text-sm leading-normal font-medium">
-                #14
-              </p>
-            </div>
-            <div className="bg-secondary flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pr-4 pl-4 transition hover:scale-105">
-              <p className="text-primary text-sm leading-normal font-medium">
-                #16
-              </p>
-            </div>
-            <div className="bg-secondary flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pr-4 pl-4 transition hover:scale-105">
-              <p className="text-primary text-sm leading-normal font-medium">
-                #18
-              </p>
-            </div>
-            <div className="bg-secondary flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pr-4 pl-4 transition hover:scale-105">
-              <p className="text-primary text-sm leading-normal font-medium">
-                #20
-              </p>
-            </div>
+            <Badge text="#8" />
+            <Badge text="#10" />
+            <Badge text="#12" />
+            <Badge text="#14" />
+            <Badge text="#16" />
+            <Badge text="#18" />
           </div>
           <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
             Precio
           </h3>
           <div className="@container">
             <div className="relative flex w-full flex-col items-start justify-between gap-3 p-4 @[480px]:flex-row">
-              <p className="text-primary w-full shrink-[3] text-base leading-normal font-medium">
-                Rango de precios
-              </p>
               <div className="flex h-[38px] w-full pt-1.5">
-                <div className="bg-secondary flex h-1 w-full rounded-sm pr-[15%] pl-[60%]">
-                  <div className="relative">
-                    <div className="absolute -top-1.5 -left-3 flex flex-col items-center gap-1">
-                      <div className="bg-accent size-4 rounded-full"></div>
-                      <p className="text-primary text-sm leading-normal font-normal">
-                        0
-                      </p>
-                    </div>
-                  </div>
-                  <div className="bg-accent h-1 flex-1 rounded-sm"></div>
-                  <div className="relative">
-                    <div className="absolute -top-1.5 -left-3 flex flex-col items-center gap-1">
-                      <div className="bg-accent size-4 rounded-full"></div>
-                      <p className="text-primary text-sm leading-normal font-normal">
-                        100
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <PriceRange min={0} max={100} step={1} />
               </div>
             </div>
           </div>
@@ -115,13 +54,7 @@ export default function Articles(): JSX.Element {
             </p>
           </div>
           <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-            <label className="flex min-w-40 flex-1 flex-col">
-              <select className="form-input text-primary placeholder:text-secondary border-secondary focus:border-secondary flex h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border bg-[#f8fbfa] bg-[image:--select-button-svg] p-[15px] text-base leading-normal font-normal focus:ring-0 focus:outline-0">
-                <option value="one">Ordenar por: Popularidad</option>
-                <option value="two">two</option>
-                <option value="three">three</option>
-              </select>
-            </label>
+            <Select options={options} />
           </div>
 
           <Suspense fallback={<Skeleton />}>
