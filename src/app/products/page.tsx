@@ -1,15 +1,18 @@
 import React, { JSX, Suspense, use } from "react";
-import { getProducts } from "../services/products";
+import { getCategories, getProducts, getSizes } from "../services/products";
 import Skeleton from "./components/Skeleton";
 import Items from "./components/Items";
-import Input from "../components/Input";
-import PriceRange from "../components/PriceRange";
-import Badge from "../components/Badge";
 import Select from "../components/Select";
+import CheckboxGroup from "./components/CheckboxGroup";
+import BadgeGroup from "./components/BadgeGroup";
+import Range from "./components/Range";
 
 export default function Articles(): JSX.Element {
   const products = use(getProducts());
   const options = ["Más relevantes", "Menor precio", "Mayor precio"];
+  const sizes = use(getSizes());
+  const categories = use(getCategories());
+
   return (
     <div className="layout-container flex h-full grow flex-col">
       <div className="flex flex-1 justify-center gap-1 px-6 py-5">
@@ -20,32 +23,16 @@ export default function Articles(): JSX.Element {
           <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
             Tipo de Mosca
           </h3>
-          <div className="flex flex-col gap-2 px-4">
-            <Input text="Efemeras" />
-            <Input text="Perdigones" />
-            <Input text="Ninfas" />
-          </div>
+          <CheckboxGroup filters={categories} />
           <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
             Tamaño
           </h3>
-          <div className="flex flex-wrap gap-3 p-3 pr-4">
-            <Badge text="#8" />
-            <Badge text="#10" />
-            <Badge text="#12" />
-            <Badge text="#14" />
-            <Badge text="#16" />
-            <Badge text="#18" />
-          </div>
+          <BadgeGroup filters={sizes} />
           <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
             Precio
           </h3>
-          <div className="@container">
-            <div className="relative flex w-full flex-col items-start justify-between gap-3 p-4 @[480px]:flex-row">
-              <div className="flex h-[38px] w-full pt-1.5">
-                <PriceRange min={0} max={100} step={1} />
-              </div>
-            </div>
-          </div>
+
+          <Range />
         </div>
         <div className="layout-content-container flex max-w-[960px] flex-1 flex-col">
           <div className="flex flex-wrap justify-between gap-3 p-4">

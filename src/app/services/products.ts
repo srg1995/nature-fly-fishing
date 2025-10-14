@@ -5,3 +5,13 @@ export const getProducts = async () => {
   if (error) throw error;
   return data;
 };
+export const getSizes = async () => {
+  const { data, error } = await supabase.from("sizes").select("*");
+  if (error) throw error;
+  return data;
+};
+export const getCategories = async () => {
+  const { data, error } = await supabase.from("categories").select("*");
+  if (error) throw error;
+  return data;
+};
