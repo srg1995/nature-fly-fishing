@@ -1,4 +1,4 @@
-import React, { JSX, use, useMemo } from "react";
+import React, { JSX, use } from "react";
 import InputSearch from "../components/InputSearch";
 
 import Badge from "../components/Badge";
