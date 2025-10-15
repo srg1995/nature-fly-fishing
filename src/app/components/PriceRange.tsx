@@ -26,6 +26,7 @@ export default function PriceRange({
 
   return (
     <div className="w-full max-w-md">
+      {val}€
       <input
         type="range"
         min={min}

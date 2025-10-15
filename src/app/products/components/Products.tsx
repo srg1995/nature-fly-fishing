@@ -1,5 +1,5 @@
 "use client";
-import React, { JSX, Suspense, useEffect, useState } from "react";
+import React, { JSX, Suspense, useEffect, useMemo, useState } from "react";
 import { Product } from "@/app/models/Product";
 import { Size } from "@/app/models/size";
 import { Type } from "@/app/models/type";
@@ -9,6 +9,8 @@ import Skeleton from "@/app/products/components/Skeleton";
 import Items from "@/app/products/components/Items";
 import Select from "@/app/components/Select";
 import Range from "@/app/products/components/Range";
+import ButtonSecondary from "@/app/components/ButtonSecondary";
+import Pagination from "./Pagination";
 interface ProductsProps {
   products: Product[];
   categories: Type[];
@@ -38,6 +40,11 @@ export default function Products({
       active: false,
     })),
   );
+
+  const maxPrice = useMemo(
+    () => Math.max(...products.map((p) => p.price)),
+    [products],
+  );
   useEffect(() => {
     const filtered = products.filter((p) => {
       const activeCategories = categoriesData
@@ -62,6 +69,11 @@ export default function Products({
     setProductsData(filtered);
   }, [categoriesData, sizesData, products]);
 
+  const cleanFilters = () => {
+    console.log("clean");
+    setCategoriesData((prev) => prev.map((c) => ({ ...c, active: false })));
+    setSizesData((prev) => prev.map((s) => ({ ...s, active: false })));
+  };
   return (
     <div className="layout-container flex h-full grow flex-col">
       <div className="flex flex-1 justify-center gap-1 px-6 py-5">
@@ -84,7 +96,9 @@ export default function Products({
             Precio
           </h3>
 
-          <Range />
+          <Range filters={maxPrice} />
+
+          <ButtonSecondary text="Limpiar Filtros" onClick={cleanFilters} />
         </div>
         <div className="layout-content-container flex max-w-[960px] flex-1 flex-col">
           <div className="flex flex-wrap justify-between gap-3 p-4">
@@ -99,71 +113,7 @@ export default function Products({
           <Suspense fallback={<Skeleton />}>
             <Items data={productsData} />
           </Suspense>
-          <div className="flex items-center justify-center p-4">
-            <a href="#" className="flex size-10 items-center justify-center">
-              <div
-                className="text-primary"
-                data-icon="CaretLeft"
-                data-size="18px"
-                data-weight="regular"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18px"
-                  height="18px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
-                >
-                  <path d="M165.66,202.34a8,8,0,0,1-11.32,11.32l-80-80a8,8,0,0,1,0-11.32l80-80a8,8,0,0,1,11.32,11.32L91.31,128Z"></path>
-                </svg>
-              </div>
-            </a>
-            <a
-              className="bg-secondary text-primary flex size-10 items-center justify-center rounded-full text-sm leading-normal font-bold tracking-[0.015em]"
-              href="#"
-            >
-              1
-            </a>
-            <a
-              className="text-primary flex size-10 items-center justify-center rounded-full text-sm leading-normal font-normal"
-              href="#"
-            >
-              2
-            </a>
-            <a
-              className="text-primary flex size-10 items-center justify-center rounded-full text-sm leading-normal font-normal"
-              href="#"
-            >
-              3
-            </a>
-            <span className="text-primary flex size-10 items-center justify-center rounded-full text-sm leading-normal font-normal">
-              ...
-            </span>
-            <a
-              className="text-primary flex size-10 items-center justify-center rounded-full text-sm leading-normal font-normal"
-              href="#"
-            >
-              10
-            </a>
-            <a href="#" className="flex size-10 items-center justify-center">
-              <div
-                className="text-primary"
-                data-icon="CaretRight"
-                data-size="18px"
-                data-weight="regular"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18px"
-                  height="18px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
-                >
-                  <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
-                </svg>
-              </div>
-            </a>
-          </div>
+          <Pagination totalPages={1} currentPage={1} onPageChange={() => {}} />
         </div>
       </div>
     </div>
