@@ -1,5 +1,5 @@
-import PriceRange from "@/app/components/PriceRange";
 import React from "react";
+import PriceRange from "@/app/components/PriceRange";
 
 export default function Range() {
   return (

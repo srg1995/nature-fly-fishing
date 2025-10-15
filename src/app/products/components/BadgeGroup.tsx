@@ -1,42 +1,41 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import Badge from "@/app/components/Badge";
-import React from "react";
+import { Size } from "@/app/models/size";
 
 interface BadgeGroupProps {
-  filters: Badge[];
+  filters: Size[];
+  onChangeFilters?: (updated: Size[]) => void;
 }
 
-interface Badge {
-  id: number;
-  label: string;
-  active: boolean;
-}
+export default function BadgeGroup({
+  filters,
+  onChangeFilters,
+}: BadgeGroupProps) {
+  const [badges, setBadges] = useState(filters);
 
-export default function BadgeGroup({ filters }: BadgeGroupProps) {
-  const [badgeData, setBadgeData] = React.useState<Badge[]>(() =>
-    filters.map((badge) => ({
-      id: badge.id,
-      label: badge.label,
-      active: false,
-    })),
-  );
+  useEffect(() => {
+    setBadges(filters);
+  }, [filters]);
 
-  const handleBadgeClick = (badge: Badge) => {
-    setBadgeData((prev) =>
-      prev.map((b) =>
-        b.label === badge.label ? { ...b, active: !b.active } : b,
-      ),
+  const toggleBadge = (id: number) => {
+    setBadges((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, active: !b.active } : b)),
     );
   };
 
+  useEffect(() => {
+    onChangeFilters?.(badges);
+  }, [badges, onChangeFilters]);
+
   return (
     <div className="flex flex-wrap gap-3 p-3 pr-4">
-      {badgeData.map((badge) => (
+      {badges.map((badge) => (
         <Badge
           key={badge.id}
           text={badge.label}
           active={badge.active}
-          handleBadgeClick={() => handleBadgeClick(badge)}
+          handleBadgeClick={() => toggleBadge(badge.id)}
         />
       ))}
     </div>

@@ -5,6 +5,7 @@ interface InputProps {
   checked?: boolean;
   onChange?: () => void;
 }
+
 export default function InputCheckbox({
   text,
   checked,

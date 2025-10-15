@@ -1,44 +1,37 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import InputCheckbox from "@/app/components/InputCheckbox";
-import React, { JSX } from "react";
+import { Type } from "@/app/models/type";
+
 interface CheckboxGroupProps {
-  filters: checkbox[];
-}
-interface checkbox {
-  id: number;
-  name: string;
-  active: boolean;
+  filters: Type[];
+  onChangeFilters?: (updated: Type[]) => void;
 }
 
 export default function CheckboxGroup({
   filters,
-}: CheckboxGroupProps): JSX.Element {
-  const [checkboxesData, setCheckboxesData] = React.useState<checkbox[]>(() =>
-    filters.map((filter) => ({
-      id: filter.id,
-      name: filter.name,
-      active: false,
-    })),
-  );
+  onChangeFilters,
+}: CheckboxGroupProps) {
+  const [checkboxes, setCheckboxes] = useState(filters);
 
-  const handleCheckboxChange = (id: number) => {
-    setCheckboxesData((prev) =>
-      prev.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, active: !checkbox.active }
-          : checkbox,
-      ),
+  const handleChange = (id: number) => {
+    setCheckboxes((prev) =>
+      prev.map((cb) => (cb.id === id ? { ...cb, active: !cb.active } : cb)),
     );
   };
 
+  useEffect(() => {
+    onChangeFilters?.(checkboxes);
+  }, [checkboxes, onChangeFilters]);
+
   return (
     <div className="flex flex-col gap-2 px-4">
-      {checkboxesData.map((checkbox) => (
+      {checkboxes.map((cb) => (
         <InputCheckbox
-          key={checkbox.id}
-          text={checkbox.name}
-          checked={checkbox.active}
-          onChange={() => handleCheckboxChange(checkbox.id)}
+          key={cb.id}
+          text={cb.name}
+          checked={cb.active}
+          onChange={() => handleChange(cb.id)}
         />
       ))}
     </div>

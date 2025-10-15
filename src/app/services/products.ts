@@ -1,7 +1,11 @@
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "@/app/lib/supabaseClient";
 
 export const getProducts = async () => {
-  const { data, error } = await supabase.from("products").select("*");
+  const { data, error } = await supabase.from("products").select(`
+    *,
+    category:categories(*),
+    product_sizes:product_sizes(*, size:sizes(*))
+  `);
   if (error) throw error;
   return data;
 };

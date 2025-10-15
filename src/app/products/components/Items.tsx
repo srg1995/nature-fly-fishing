@@ -1,11 +1,9 @@
 "use client";
+
+import { Product } from "@/app/models/Product";
 import Image from "next/image";
 import React, { JSX } from "react";
-interface Product {
-  id: number;
-  description: string;
-  price: number;
-}
+
 interface ProductProps {
   data: Product[];
 }
