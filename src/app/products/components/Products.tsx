@@ -70,29 +70,28 @@ export default function Products({
   }, [categoriesData, sizesData, products]);
 
   const cleanFilters = () => {
-    console.log("clean");
     setCategoriesData((prev) => prev.map((c) => ({ ...c, active: false })));
     setSizesData((prev) => prev.map((s) => ({ ...s, active: false })));
   };
   return (
     <div className="layout-container flex h-full grow flex-col">
       <div className="flex flex-1 justify-center gap-1 px-6 py-5">
-        <div className="layout-content-container flex w-80 flex-col">
-          <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
+        <div className="layout-content-container flex w-80 flex-col gap-4 px-4">
+          <h3 className="text-primary text-lg leading-tight font-bold tracking-[-0.015em]">
             Filtrar
           </h3>
-          <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
+          <h3 className="text-primary text-lg leading-tight font-bold tracking-[-0.015em]">
             Tipo de Mosca
           </h3>
           <CheckboxGroup
             filters={categoriesData}
             onChangeFilters={setCategoriesData}
           />
-          <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
+          <h3 className="text-primary text-lg leading-tight font-bold tracking-[-0.015em]">
             Tamaño
           </h3>
           <BadgeGroup filters={sizesData} onChangeFilters={setSizesData} />
-          <h3 className="text-primary px-4 pt-4 pb-2 text-lg leading-tight font-bold tracking-[-0.015em]">
+          <h3 className="text-primary text-lg leading-tight font-bold tracking-[-0.015em]">
             Precio
           </h3>
 

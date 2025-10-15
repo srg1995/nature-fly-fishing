@@ -1,7 +1,7 @@
 import React, { JSX } from "react";
 interface ButtonSecondaryProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 export default function ButtonSecondary({
   text,

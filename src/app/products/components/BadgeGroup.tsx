@@ -20,7 +20,7 @@ export default function BadgeGroup({
   };
 
   return (
-    <div className="flex flex-wrap gap-3 p-3 pr-4">
+    <div className="flex flex-wrap gap-2">
       {filters.map((badge) => (
         <Badge
           key={badge.id}
