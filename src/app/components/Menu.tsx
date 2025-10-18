@@ -1,9 +1,13 @@
+"use client";
 import React, { JSX } from "react";
 import ButtonSecondary from "./ButtonSecondary";
 import LinkPrimary from "./LinkPrimary";
 import LinkButton from "./LinkButton";
+import LoginModal from "./login";
 
 export default function Menu(): JSX.Element {
+  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
+
   return (
     <header className="border-b-secondary flex items-center justify-between border-b border-solid px-10 py-3 whitespace-nowrap">
       <div className="text-primary flex items-center gap-4">
@@ -29,8 +33,13 @@ export default function Menu(): JSX.Element {
           <LinkPrimary href="contact" text="Contacto" />
         </div>
         <div className="flex gap-2">
-          <ButtonSecondary text="Iniciar sesión" />
-
+          <ButtonSecondary
+            text="Iniciar sesión"
+            onClick={() => setIsLoginModalOpen((value) => !value)}
+          />
+          {isLoginModalOpen && (
+            <LoginModal onClose={() => setIsLoginModalOpen(false)} />
+          )}
           <LinkButton href="payment">
             <div
               className="text-primary"
