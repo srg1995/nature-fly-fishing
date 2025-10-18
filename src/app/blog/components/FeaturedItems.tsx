@@ -2,15 +2,15 @@ import ButtonSecondary from "@/app/components/ButtonSecondary";
 import { BlogItem } from "@/app/models/blog";
 import React, { JSX, useMemo } from "react";
 interface FeaturedItemsProps {
-  articulos: BlogItem[];
+  articles: BlogItem[];
 }
 export default function FeaturedItems({
-  articulos,
+  articles,
 }: FeaturedItemsProps): JSX.Element {
-  const articulosDestacados = useMemo(() => articulos.slice(0, 3), [articulos]);
+  const outstandingArticles = useMemo(() => articles.slice(0, 3), [articles]);
   return (
     <>
-      {articulosDestacados.map((articulo) => (
+      {outstandingArticles.map((articulo) => (
         <div className="p-4" key={articulo.id}>
           <div className="flex items-stretch justify-between gap-4 rounded-lg">
             <div className="flex flex-[2_2_0px] flex-col gap-4">

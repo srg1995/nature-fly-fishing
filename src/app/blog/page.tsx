@@ -9,7 +9,7 @@ import FeaturedItems from "./components/FeaturedItems";
 
 export default function Blog(): JSX.Element {
   const options = ["Todos", "Técnicas", "Noticias", "Consejos", "Experiencias"];
-  const articulos = use(getItemsBlog());
+  const articles = use(getItemsBlog());
 
   return (
     <div className="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
@@ -47,7 +47,7 @@ export default function Blog(): JSX.Element {
             <h2 className="text-primary px-4 pt-5 pb-3 text-[22px] leading-tight font-bold tracking-[-0.015em]">
               Artículos Recientes
             </h2>
-            <Items articulos={articulos} />
+            <Items articles={articles} />
 
             <h2 className="text-primary px-4 pt-5 pb-3 text-[22px] leading-tight font-bold tracking-[-0.015em]">
               Categorías
@@ -61,7 +61,7 @@ export default function Blog(): JSX.Element {
             <h2 className="text-primary px-4 pt-5 pb-3 text-[22px] leading-tight font-bold tracking-[-0.015em]">
               Artículos Destacados
             </h2>
-            <FeaturedItems articulos={articulos} />
+            <FeaturedItems articles={articles} />
           </div>
         </div>
       </div>

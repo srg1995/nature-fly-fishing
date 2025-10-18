@@ -2,8 +2,8 @@
 import React, { JSX } from "react";
 interface BadgeProps {
   text: string;
-  active: boolean;
-  handleBadgeClick: () => void;
+  active?: boolean;
+  handleBadgeClick?: () => void;
 }
 export default function Badge({
   text,

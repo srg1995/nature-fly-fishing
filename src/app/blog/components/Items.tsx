@@ -1,30 +1,16 @@
 import ButtonSecondary from "@/app/components/ButtonSecondary";
 import { BlogItem } from "@/app/models/blog";
 import React, { JSX } from "react";
+import Item from "./Item";
 
 interface ItemsProps {
-  articulos: BlogItem[];
+  articles: BlogItem[];
 }
-export default function Items({ articulos }: ItemsProps): JSX.Element {
+export default function Items({ articles }: ItemsProps): JSX.Element {
   return (
     <>
-      {articulos.map((articulo) => (
-        <div className="p-4" key={articulo.id}>
-          <div className="flex items-stretch justify-between gap-4 rounded-lg">
-            <div className="flex flex-[2_2_0px] flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <p className="text-primary text-base leading-tight font-bold">
-                  {articulo.title}
-                </p>
-                <p className="text-tertiary text-sm leading-normal font-normal">
-                  {articulo.summary}
-                </p>
-              </div>
-              <ButtonSecondary text="Leer más" />
-            </div>
-            <div className="aspect-video w-full flex-1 rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat"></div>
-          </div>
-        </div>
+      {articles.map((article) => (
+        <Item key={article.id} article={article} />
       ))}
     </>
   );
