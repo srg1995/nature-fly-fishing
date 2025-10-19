@@ -1,15 +1,19 @@
 import { supabase } from "../lib/supabaseClient";
 
-export const AuthService = async () => {
+interface AuthCredentials {
+  email: string;
+  password: string;
+}
+
+export const AuthService = async ({ email, password }: AuthCredentials) => {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: "usuario@ejemplo.com",
-    password: "123456",
+    email,
+    password,
   });
 
   if (error) {
-    console.error("Error al iniciar sesión:", error.message);
+    return { data: null, error };
   } else {
-    console.log("Usuario autenticado:", data.user);
-    console.log("Token:", data.session.access_token);
+    return { data, error: null };
   }
 };

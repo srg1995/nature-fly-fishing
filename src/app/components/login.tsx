@@ -1,9 +1,9 @@
 "use client";
-import React, { JSX, use, useState } from "react";
+import React, { JSX, useState } from "react";
 import { createPortal } from "react-dom";
 import { useUserContext } from "../context/userContext";
 import ButtonSecondary from "./ButtonSecondary";
-import { supabase } from "../lib/supabaseClient";
+import { AuthService } from "../services/auth";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -20,10 +20,7 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
     setLoading(true);
     setErrorMsg("");
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data, error } = await AuthService({ email, password });
 
     setLoading(false);
 
@@ -56,38 +53,45 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
         </button>
 
         <h2 className="mb-4 text-center text-xl font-semibold">
-          {user ? `Bienvenido, ${user.email}` : "Iniciar sesión"}
+          {user ? `Hola, ${user.email}` : "Iniciar sesión"}
         </h2>
 
         {!user ? (
-          <form onSubmit={handleLogin} className="flex flex-col gap-3">
-            <input
-              type="email"
-              placeholder="Correo electrónico"
-              className="rounded-lg border p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              className="rounded-lg border p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            {errorMsg && (
-              <p className="text-center text-sm text-red-600">{errorMsg}</p>
-            )}
-            <button
-              type="submit"
-              disabled={loading}
-              className="rounded-lg bg-blue-600 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
-            >
-              {loading ? "Iniciando..." : "Entrar"}
-            </button>
-          </form>
+          <>
+            <form onSubmit={handleLogin} className="flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="Correo electrónico"
+                className="rounded-lg border p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Contraseña"
+                className="rounded-lg border p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              {errorMsg && (
+                <p className="text-center text-sm text-red-600">{errorMsg}</p>
+              )}
+              <div className="flex justify-center">
+                <ButtonSecondary
+                  disabled={loading}
+                  text={loading ? "Iniciando..." : "Entrar"}
+                />
+              </div>
+            </form>
+            <div className="mt-4 text-center text-sm text-gray-600">
+              ¿Eres nuevo?{" "}
+              <a href="#" className="text-blue-600">
+                Regístrate aquí.
+              </a>
+            </div>
+          </>
         ) : (
           <div className="flex flex-col items-center gap-4">
             <p className="text-center text-sm text-gray-600">
@@ -102,12 +106,6 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
             />
           </div>
         )}
-        <div className="mt-4 text-center text-sm text-gray-600">
-          ¿Eres nuevo?{" "}
-          <a href="#" className="text-blue-600">
-            Regístrate aquí.
-          </a>
-        </div>
       </div>
     </div>,
     document.body, // 👈 aquí está el portal
