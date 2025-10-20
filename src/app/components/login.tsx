@@ -2,10 +2,9 @@
 import React, { JSX, useState } from "react";
 import { createPortal } from "react-dom";
 import { useUserContext } from "../context/userContext";
-import ButtonSecondary from "./ButtonSecondary";
-
 import LinkPrimary from "./LinkPrimary";
 import { SignInAuthService } from "../services/auth";
+import ButtonFull from "./ButtonFull";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -76,7 +75,7 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
                 <p className="text-center text-sm text-red-600">{errorMsg}</p>
               )}
               <div className="flex justify-center">
-                <ButtonSecondary
+                <ButtonFull
                   disabled={loading}
                   text={loading ? "Iniciando..." : "Entrar"}
                 />
@@ -94,7 +93,7 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
             <p className="text-center text-sm text-gray-600">
               ¿Quieres cerrar sesión?
             </p>
-            <ButtonSecondary
+            <ButtonFull
               text="Cerrar sesión"
               onClick={() => {
                 setUser(null);

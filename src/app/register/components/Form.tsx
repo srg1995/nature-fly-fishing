@@ -1,7 +1,5 @@
 "use client";
-import ButtonSecondary from "@/app/components/ButtonSecondary";
-import InputText from "@/app/components/InputText";
-import { supabase } from "@/app/lib/supabaseClient";
+import ButtonFull from "@/app/components/ButtonFull";
 import { SignUpAuthService } from "@/app/services/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
@@ -82,7 +80,7 @@ export default function Form() {
               {errors.password.message}
             </span>
           )}
-          <ButtonSecondary disabled={isSubmitting} text="Registrarse" />
+          <ButtonFull disabled={isSubmitting} text="Registrarse" />
         </form>
       )}
     </>
