@@ -1,3 +1,4 @@
+import InputCheckbox from "@/app/components/InputCheckbox";
 import InputText from "@/app/components/InputText";
 import React from "react";
 
@@ -31,15 +32,10 @@ export default function AddressForm() {
       <InputText label="País" placeholder="Tu país" />
 
       <div className="col-span-3">
-        <label className="flex flex-row gap-x-3 py-3">
-          <input
-            type="checkbox"
-            className="text-tertiary checked:bg-tertiary checked:border-tertiary border-accent focus:border-accent h-5 w-5 rounded border-2 bg-transparent checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:outline-none"
-          />
-          <p className="text-primary text-base leading-normal font-normal">
-            La dirección de facturación es la misma que la de envío
-          </p>
-        </label>
+        <InputCheckbox
+          text="La dirección de facturación es la misma que la de envío"
+          checked={true}
+        />
       </div>
     </div>
   );
