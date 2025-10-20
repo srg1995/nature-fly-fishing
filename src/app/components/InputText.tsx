@@ -15,14 +15,14 @@ export default function InputText({
 }: InputTextProps): JSX.Element {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={label} className="text-primary text-sm font-medium">
+      <label htmlFor={label} className="text-tertiary text-sm font-semibold">
         {label}
       </label>
       <input
         type="text"
         id={label}
         name={label}
-        className="focus:ring-primary focus:border-primary w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 transition focus:ring-2 focus:outline-none"
+        className="form-input text-tertiary placeholder:text-tertiary border-accent focus:border-accent flex h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border p-[15px] text-base leading-normal font-normal focus:ring-0 focus:outline-0"
         placeholder={placeholder}
         onChange={(e) => onChange?.(e.target.value)}
       />

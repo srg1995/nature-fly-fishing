@@ -1,3 +1,4 @@
+import Dropdown from "@/app/components/Dropdown";
 import { useUserContext } from "@/app/context/userContext";
 import React from "react";
 
@@ -19,11 +20,12 @@ export default function ShoppingCart() {
   return (
     <div className="p-4">
       <h2 className="mb-4 text-xl font-semibold">Carrito de compras</h2>
+
       <ul className="space-y-4">
         {shoppingCart.map((item, index) => (
           <li
             key={index}
-            className="flex items-center justify-between rounded-lg bg-white p-4 shadow-md transition-shadow hover:shadow-lg"
+            className="bg-secondary/50 flex items-center justify-between rounded-md p-4 shadow-md transition-shadow"
           >
             <div className="flex items-center space-x-4">
               <div>
