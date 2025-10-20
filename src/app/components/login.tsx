@@ -3,7 +3,9 @@ import React, { JSX, useState } from "react";
 import { createPortal } from "react-dom";
 import { useUserContext } from "../context/userContext";
 import ButtonSecondary from "./ButtonSecondary";
-import { AuthService } from "../services/auth";
+
+import LinkPrimary from "./LinkPrimary";
+import { SignInAuthService } from "../services/auth";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -20,7 +22,7 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
     setLoading(true);
     setErrorMsg("");
 
-    const { data, error } = await AuthService({ email, password });
+    const { data, error } = await SignInAuthService({ email, password });
 
     setLoading(false);
 
@@ -34,17 +36,12 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
           token: data.session.access_token ?? "",
         });
       }
-
-      console.log("Usuario autenticado:", data.user);
-      console.log("Token:", data.session?.access_token);
     }
   };
 
-  // 🔹 Contenido del modal (con Tailwind)
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="relative w-80 rounded-2xl bg-white p-6 shadow-lg">
-        {/* Botón cerrar */}
         <button
           className="absolute top-2 right-3 text-xl text-gray-500 hover:text-gray-700"
           onClick={onClose}
@@ -86,10 +83,10 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
               </div>
             </form>
             <div className="mt-4 text-center text-sm text-gray-600">
-              ¿Eres nuevo?{" "}
-              <a href="#" className="text-blue-600">
+              ¿Eres nuevo?
+              <LinkPrimary href="/register" onClick={onClose}>
                 Regístrate aquí.
-              </a>
+              </LinkPrimary>
             </div>
           </>
         ) : (
@@ -108,6 +105,6 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
         )}
       </div>
     </div>,
-    document.body, // 👈 aquí está el portal
+    document.body,
   );
 }

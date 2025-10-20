@@ -135,7 +135,7 @@ export default function Contact(): JSX.Element {
               Información de contacto
             </h2>
             <p className="text-primary px-4 pt-1 pb-3 text-base leading-normal font-normal">
-              Correo electrónico:{" "}
+              Correo electrónico:
               <span className="font-semibold">
                 contacto@natureflyfishing.com
               </span>

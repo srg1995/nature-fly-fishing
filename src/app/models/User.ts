@@ -4,3 +4,7 @@ export interface User {
   name?: string;
   token: string;
 }
+export interface AuthCredentials {
+  email: string;
+  password: string;
+}

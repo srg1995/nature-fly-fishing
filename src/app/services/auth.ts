@@ -1,11 +1,10 @@
 import { supabase } from "../lib/supabaseClient";
+import { AuthCredentials } from "../models/User";
 
-interface AuthCredentials {
-  email: string;
-  password: string;
-}
-
-export const AuthService = async ({ email, password }: AuthCredentials) => {
+export const SignInAuthService = async ({
+  email,
+  password,
+}: AuthCredentials) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -15,5 +14,36 @@ export const AuthService = async ({ email, password }: AuthCredentials) => {
     return { data: null, error };
   } else {
     return { data, error: null };
+  }
+};
+
+export const SignUpAuthService = async ({
+  email,
+  password,
+}: AuthCredentials) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    if (error.message.includes("User already registered")) {
+      return {
+        data: null,
+        error: { message: "El correo ya está registrado." },
+      };
+    }
+    return { data: null, error };
+  } else {
+    if (data.user && data.user.identities?.length === 0) {
+      return {
+        data: null,
+        error: {
+          message: "⚠️ Este correo ya está registrado",
+        },
+      };
+    } else {
+      return { data, error: null };
+    }
   }
 };
