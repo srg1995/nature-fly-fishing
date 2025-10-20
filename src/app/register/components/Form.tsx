@@ -67,7 +67,7 @@ export default function Form() {
               {errors.email.message}
             </span>
           )}
-          <InputText />
+
           <input
             type="password"
             placeholder="Contraseña"
