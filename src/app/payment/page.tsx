@@ -1,4 +1,6 @@
+"use client";
 import React, { JSX } from "react";
+import ShoppingCard from "./components/ShoppingCard";
 
 export default function Payment(): JSX.Element {
   return (
@@ -6,6 +8,7 @@ export default function Payment(): JSX.Element {
       <div className="layout-container flex h-full grow flex-col">
         <div className="flex flex-1 justify-center px-40 py-5">
           <div className="layout-content-container flex w-[512px] max-w-[960px] flex-1 flex-col py-5">
+            <ShoppingCard />
             <h2 className="text-primary tracking-light px-4 pt-5 pb-3 text-left text-[28px] leading-tight font-bold">
               Información de Envío
             </h2>

@@ -28,9 +28,9 @@ export default function Menu(): JSX.Element {
       <div className="flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
           <LinkPrimary href="/" text="Inicio" />
-          <LinkPrimary href="products" text="Tienda" />
-          <LinkPrimary href="blog" text="Blog" />
-          <LinkPrimary href="contact" text="Contacto" />
+          <LinkPrimary href="/products" text="Tienda" />
+          <LinkPrimary href="/blog" text="Blog" />
+          <LinkPrimary href="/contact" text="Contacto" />
         </div>
         <div className="flex gap-2">
           <ButtonSecondary
@@ -40,7 +40,7 @@ export default function Menu(): JSX.Element {
           {isLoginModalOpen && (
             <LoginModal onClose={() => setIsLoginModalOpen(false)} />
           )}
-          <LinkButton href="payment">
+          <LinkButton href="/payment">
             <div
               className="text-primary"
               data-icon="ShoppingBag"

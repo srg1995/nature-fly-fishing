@@ -19,3 +19,19 @@ export const getCategories = async () => {
   if (error) throw error;
   return data;
 };
+
+export const getProductById = async (id: number) => {
+  const { data, error } = await supabase
+    .from("products")
+    .select(
+      `
+    *,
+    category:categories(*),
+    product_sizes:product_sizes(*, size:sizes(*))
+  `,
+    )
+    .eq("id", id)
+    .single();
+  if (error) throw error;
+  return data;
+};
