@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { JSX } from "react";
-import ButtonPrimary from "./components/ButtonPrimary";
-import ButtonSecondary from "./components/ButtonSecondary";
+import ButtonPrimary from "@/app/components/ButtonPrimary";
+import ButtonSecondary from "@/app/components/ButtonSecondary";
 
 export default function Home(): JSX.Element {
   const products = [

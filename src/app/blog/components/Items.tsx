@@ -1,7 +1,6 @@
-import ButtonSecondary from "@/app/components/ButtonSecondary";
 import { BlogItem } from "@/app/models/blog";
 import React, { JSX } from "react";
-import Item from "./Item";
+import Item from "@/app/blog/components/Item";
 
 interface ItemsProps {
   articles: BlogItem[];

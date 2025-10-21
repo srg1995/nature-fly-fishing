@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import InputText from "@/app/components/InputText";
 import Textarea from "@/app/components/Textarea";
+import Image from "next/image";
 
 const schema = z.object({
   name: z.string().min(4, "El nombre debe tener al menos 4 caracteres"),
@@ -97,10 +98,12 @@ export default function Contact(): JSX.Element {
           </p>
 
           <div className="w-full overflow-hidden rounded-lg shadow-lg">
-            <img
+            <Image
               src="/images/bg-header.png"
               alt="Pesca con mosca"
               className="h-64 w-full object-cover"
+              width={1280}
+              height={720}
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { getProductById } from "@/app/services/products";
-import React, { JSX, use } from "react";
-import ProductItem from "./components/Product";
+import React, { JSX } from "react";
+import ProductItem from "@/app/products/[productId]/components/Product";
 
 interface ProductIdProps {
   params: {

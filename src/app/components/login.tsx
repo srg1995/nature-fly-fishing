@@ -1,11 +1,11 @@
 "use client";
 import React, { JSX, useState } from "react";
 import { createPortal } from "react-dom";
-import { useUserContext } from "../context/userContext";
-import LinkPrimary from "./LinkPrimary";
-import { SignInAuthService } from "../services/auth";
-import ButtonFull from "./ButtonFull";
-import InputText from "./InputText";
+import { useUserContext } from "@/app/context/userContext";
+import LinkPrimary from "@/app/components/LinkPrimary";
+import { SignInAuthService } from "@/app/services/auth";
+import ButtonFull from "@/app/components/ButtonFull";
+import InputText from "@/app/components/InputText";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

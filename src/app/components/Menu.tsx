@@ -1,9 +1,9 @@
 "use client";
 import React, { JSX } from "react";
-import ButtonSecondary from "./ButtonSecondary";
-import LinkPrimary from "./LinkPrimary";
-import LinkButton from "./LinkButton";
-import LoginModal from "./login";
+import ButtonSecondary from "@/app/components/ButtonSecondary";
+import LinkPrimary from "@/app/components/LinkPrimary";
+import LinkButton from "@/app/components/LinkButton";
+import LoginModal from "@/app/components/login";
 
 export default function Menu(): JSX.Element {
   const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);

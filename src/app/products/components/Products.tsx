@@ -1,8 +1,6 @@
 "use client";
 import React, { JSX, Suspense, useEffect, useMemo, useState } from "react";
-import { Product } from "@/app/models/Product";
-import { Size } from "@/app/models/size";
-import { Type } from "@/app/models/type";
+import { Product, Size, Type } from "@/app/models/Product";
 import CheckboxGroup from "@/app/products/components/CheckboxGroup";
 import BadgeGroup from "@/app/products/components/BadgeGroup";
 import Skeleton from "@/app/products/components/Skeleton";
@@ -10,7 +8,7 @@ import Items from "@/app/products/components/Items";
 import Select from "@/app/components/Select";
 import Range from "@/app/products/components/Range";
 import ButtonSecondary from "@/app/components/ButtonSecondary";
-import Pagination from "./Pagination";
+import Pagination from "@/app/products/components/Pagination";
 interface ProductsProps {
   products: Product[];
   categories: Type[];

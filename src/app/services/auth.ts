@@ -1,5 +1,5 @@
-import { supabase } from "../lib/supabaseClient";
-import { AuthCredentials } from "../models/User";
+import { supabase } from "@/app/lib/supabaseClient";
+import { AuthCredentials } from "@/app/models/User";
 
 export const SignInAuthService = async ({
   email,

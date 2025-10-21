@@ -1,9 +1,9 @@
 "use client";
 import React, { JSX } from "react";
-import ShoppingCard from "./components/ShoppingCard";
-import Dropdown from "../components/Dropdown";
-import AddressForm from "./components/AddressForm";
-import MethodForm from "./components/MethodForm";
+import ShoppingCard from "@/app/payment/components/ShoppingCard";
+import Dropdown from "@/app/components/Dropdown";
+import AddressForm from "@/app/payment/components/AddressForm";
+import MethodForm from "@/app/payment/components/MethodForm";
 
 export default function Payment(): JSX.Element {
   return (

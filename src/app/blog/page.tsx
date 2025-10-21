@@ -1,11 +1,11 @@
 import React, { JSX, use } from "react";
-import InputSearch from "../components/InputSearch";
+import InputSearch from "@/app/components/InputSearch";
 
-import Badge from "../components/Badge";
+import Badge from "@/app/components/Badge";
 
-import { getItemsBlog } from "../services/blog";
-import Items from "./components/Items";
-import FeaturedItems from "./components/FeaturedItems";
+import { getItemsBlog } from "@/app/services/blog";
+import Items from "@/app/blog/components/Items";
+import FeaturedItems from "@/app/blog/components/FeaturedItems";
 
 export default function Blog(): JSX.Element {
   const options = ["Todos", "Técnicas", "Noticias", "Consejos", "Experiencias"];

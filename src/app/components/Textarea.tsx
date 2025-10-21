@@ -1,5 +1,5 @@
 "use client";
-import React, { JSX, useEffect, useState } from "react";
+import React, { JSX, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface InputTextProps {
