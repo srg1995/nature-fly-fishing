@@ -5,25 +5,41 @@ import { useUserContext } from "../context/userContext";
 import LinkPrimary from "./LinkPrimary";
 import { SignInAuthService } from "../services/auth";
 import ButtonFull from "./ButtonFull";
+import InputText from "./InputText";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 interface LoginModalProps {
   onClose: () => void;
 }
+const schema = z.object({
+  email: z.string().email("Correo electrónico inválido"),
+  password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres"),
+});
+type FormData = z.infer<typeof schema>;
+
 export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
   const { user, setUser } = useUserContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: "onBlur",
+  });
+
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleLogin = async (formData: FormData) => {
     setErrorMsg("");
 
-    const { data, error } = await SignInAuthService({ email, password });
-
-    setLoading(false);
+    const { data, error } = await SignInAuthService({
+      email: formData.email,
+      password: formData.password,
+    });
 
     if (error) {
       setErrorMsg(error.message);
@@ -34,6 +50,8 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
           id: Number(data.user.id ?? 0),
           token: data.session.access_token ?? "",
         });
+        reset();
+        onClose();
       }
     }
   };
@@ -54,30 +72,28 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
 
         {!user ? (
           <>
-            <form onSubmit={handleLogin} className="flex flex-col gap-3">
-              <input
+            <form
+              onSubmit={handleSubmit(handleLogin)}
+              className="flex flex-col gap-3"
+            >
+              <InputText
+                label="Correo electrónico"
                 type="email"
-                placeholder="Correo electrónico"
-                className="rounded-lg border p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
+                register={register("email")}
+                error={errors.email?.message}
               />
-              <input
+
+              <InputText
+                label="Contraseña"
                 type="password"
-                placeholder="Contraseña"
-                className="rounded-lg border p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                register={register("password")}
+                error={errors.password?.message}
               />
-              {errorMsg && (
-                <p className="text-center text-sm text-red-600">{errorMsg}</p>
-              )}
+
               <div className="flex justify-center">
                 <ButtonFull
-                  disabled={loading}
-                  text={loading ? "Iniciando..." : "Entrar"}
+                  disabled={isSubmitting}
+                  text={isSubmitting ? "Iniciando..." : "Entrar"}
                 />
               </div>
             </form>
