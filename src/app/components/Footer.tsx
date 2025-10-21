@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="flex justify-center">
-      <div className="flex max-w-[960px] flex-1 flex-col">
+    <footer className="border-accent/30 bg-background/10 shadow-accent mt-4 flex justify-center border-t shadow-2xl">
+      <div className="flex max-w-[1280px] flex-1 flex-col">
         <footer className="@container flex flex-col gap-6 px-5 py-10 text-center">
           <div className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
             <a
