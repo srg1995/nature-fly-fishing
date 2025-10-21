@@ -5,7 +5,7 @@ interface InputTextProps {
   label: string;
   placeholder?: string;
   value?: string;
-  onChange?: () => void;
+  onChange?: (value: number) => void;
   min: number;
   max: number;
 }
@@ -31,7 +31,7 @@ export default function InputNumber({
         max={max}
         className="focus:ring-primary focus:border-primary w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 transition focus:ring-2 focus:outline-none"
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={(e) => onChange?.(parseInt(e.target.value))}
       />
     </div>
   );

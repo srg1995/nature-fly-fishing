@@ -2,7 +2,7 @@ import React, { JSX } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface InputTextProps {
-  id: string;
+  id?: string;
   label: string;
   placeholder?: string;
   type?: string;

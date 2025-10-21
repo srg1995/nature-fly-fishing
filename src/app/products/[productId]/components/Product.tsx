@@ -20,13 +20,12 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
 
   const sizeOptions = product?.product_sizes.filter((s) => s.stock > 0);
 
-  const handleSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSize(parseInt(e.target.value));
+  const handleSizeChange = (value: number) => {
+    setSelectedSize(value);
     setQuantity(1);
   };
 
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value);
+  const handleQuantityChange = (value: number) => {
     const maxStock =
       product?.product_sizes.find((s) => s.size.id === selectedSize)?.stock ||
       1;
@@ -44,11 +43,10 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
       product.product_sizes.find((ps) => ps.size.id === selectedSize)?.price ||
       0;
 
-    //si el eleento ya existe en el carrito, actualizar la cantidad y si no lo añade normal
     const existingIndex = shoppingCart.findIndex(
       (item) => item.product === product?.name && item.size === sizeProduct,
     );
-    console.log(product);
+
     if (existingIndex >= 0) {
       const updatedCart = [...shoppingCart];
       updatedCart[existingIndex].quantity += quantity;
@@ -66,25 +64,41 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
     }
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   };
+
   return (
-    <div className="mx-auto flex max-w-3xl flex-col gap-8 p-6 md:flex-row">
-      <div className="flex-1">
-        <Image
-          width={220}
-          height={220}
-          src="/images/bg-header.png"
-          alt="Mosca Adams"
-          className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:blur-sm"
-        />
+    <div className="mx-auto flex max-w-6xl flex-col gap-8 p-4 sm:p-6 md:flex-row">
+      {/* Imagen del producto */}
+      <div className="flex flex-1 items-center justify-center">
+        <div className="w-full max-w-md overflow-hidden rounded-2xl shadow-md">
+          <Image
+            width={600}
+            height={600}
+            src="/images/bg-header.png"
+            alt={product?.name || "Producto"}
+            className="h-auto w-full object-cover transition-transform duration-500 hover:scale-105"
+          />
+        </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-4">
-        <h1 className="text-3xl font-bold">{product?.name}</h1>
-        <p className="text-gray-600">{product?.description}</p>
-        <p className="text-xl font-semibold">{product?.price.toFixed(2)} €</p>
-
+      {/* Detalles del producto */}
+      <div className="flex flex-1 flex-col justify-center gap-5">
         <div>
-          <Select>
+          <h1 className="text-primary text-2xl font-bold sm:text-3xl md:text-4xl">
+            {product?.name}
+          </h1>
+          <p className="mt-2 text-sm leading-relaxed text-gray-600 sm:text-base">
+            {product?.description}
+          </p>
+        </div>
+
+        <p className="text-tertiary text-2xl font-semibold">
+          {product?.price.toFixed(2)} €
+        </p>
+
+        {/* Selector de tamaño */}
+        <div className="flex flex-col gap-2">
+          <label className="text-primary text-sm font-medium">Tamaño</label>
+          <Select onChange={handleSizeChange}>
             {sizeOptions &&
               sizeOptions.map((s) => (
                 <option key={s.id} value={s.size.id}>
@@ -93,9 +107,11 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
               ))}
           </Select>
         </div>
+
+        {/* Cantidad */}
         <div className="flex flex-col gap-2">
           <InputNumber
-            label="Cantidad:"
+            label="Cantidad"
             value={quantity.toString()}
             onChange={handleQuantityChange}
             min={1}
@@ -105,11 +121,14 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
           />
         </div>
 
-        <ButtonFull
-          onClick={handleAddToCart}
-          disabled={sizeOptions?.length === 0}
-          text="Añadir al carrito"
-        />
+        {/* Botón */}
+        <div className="mt-4">
+          <ButtonFull
+            onClick={handleAddToCart}
+            disabled={sizeOptions?.length === 0}
+            text="Añadir al carrito"
+          />
+        </div>
       </div>
     </div>
   );
