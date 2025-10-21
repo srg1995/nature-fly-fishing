@@ -1,5 +1,5 @@
 "use client";
-import React, { JSX, useState } from "react";
+import React, { JSX } from "react";
 import { RadioGroupOption } from "@/app/models/form";
 
 interface RadioGroupProps {

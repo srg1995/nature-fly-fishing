@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Badge from "@/app/components/Badge";
-import { Size } from "@/app/models/size";
+import { Size } from "@/app/models/Product";
 
 interface BadgeGroupProps {
   filters: Size[];

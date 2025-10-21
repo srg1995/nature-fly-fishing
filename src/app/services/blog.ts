@@ -1,4 +1,4 @@
-import { BlogItem } from "../models/blog";
+import { BlogItem } from "@/app/models/blog";
 
 const articulos: BlogItem[] = [
   {

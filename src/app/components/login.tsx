@@ -34,8 +34,6 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleLogin = async (formData: FormData) => {
-    setErrorMsg("");
-
     const { data, error } = await SignInAuthService({
       email: formData.email,
       password: formData.password,
@@ -105,6 +103,11 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
                 Regístrate aquí.
               </LinkPrimary>
             </div>
+            {errorMsg && (
+              <div className="mt-4 text-center text-sm text-red-600">
+                {errorMsg}
+              </div>
+            )}
           </>
         ) : (
           <div className="flex flex-col items-center gap-4">

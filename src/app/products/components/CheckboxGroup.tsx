@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import InputCheckbox from "@/app/components/InputCheckbox";
-import { Type } from "@/app/models/type";
+import { Type } from "@/app/models/Product";
 
 interface CheckboxGroupProps {
   filters: Type[];

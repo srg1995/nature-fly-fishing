@@ -43,7 +43,6 @@ export default function Pagination({
   const visiblePages = getVisiblePages();
   return (
     <div className="flex items-center justify-center p-4 select-none">
-      {/* Botón anterior */}
       <button
         onClick={handlePrev}
         disabled={currentPage === 1}
@@ -63,7 +62,6 @@ export default function Pagination({
         </svg>
       </button>
 
-      {/* Páginas visibles */}
       {visiblePages[0] > 1 && (
         <>
           <button
@@ -110,7 +108,6 @@ export default function Pagination({
         </>
       )}
 
-      {/* Botón siguiente */}
       <button
         onClick={handleNext}
         disabled={currentPage === totalPages}
