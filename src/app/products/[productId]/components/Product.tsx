@@ -67,7 +67,6 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8 p-4 sm:p-6 md:flex-row">
-      {/* Imagen del producto */}
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-md overflow-hidden rounded-2xl shadow-md">
           <Image
@@ -80,7 +79,6 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
         </div>
       </div>
 
-      {/* Detalles del producto */}
       <div className="flex flex-1 flex-col justify-center gap-5">
         <div>
           <h1 className="text-primary text-2xl font-bold sm:text-3xl md:text-4xl">
@@ -95,7 +93,6 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
           {product?.price.toFixed(2)} €
         </p>
 
-        {/* Selector de tamaño */}
         <div className="flex flex-col gap-2">
           <label className="text-primary text-sm font-medium">Tamaño</label>
           <Select onChange={handleSizeChange}>
@@ -108,7 +105,6 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
           </Select>
         </div>
 
-        {/* Cantidad */}
         <div className="flex flex-col gap-2">
           <InputNumber
             label="Cantidad"
@@ -121,7 +117,6 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
           />
         </div>
 
-        {/* Botón */}
         <div className="mt-4">
           <ButtonFull
             onClick={handleAddToCart}

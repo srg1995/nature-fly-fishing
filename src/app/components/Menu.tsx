@@ -43,7 +43,7 @@ export default function Menu(): JSX.Element {
             )}
             <LinkButton href="/payment">
               <div
-                className="text-primary"
+                className="text-foreground"
                 data-icon="ShoppingBag"
                 data-size="20px"
                 data-weight="regular"

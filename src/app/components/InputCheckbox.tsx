@@ -30,7 +30,7 @@ export default function InputCheckbox({
       >
         <polyline points="20 6 9 17 4 12" />
       </svg>
-      <span className="text-primary text-base">{text}</span>
+      <span className="text-tertiary text-base">{text}</span>
     </label>
   );
 }

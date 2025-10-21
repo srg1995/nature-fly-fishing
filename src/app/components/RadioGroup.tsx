@@ -30,7 +30,7 @@ export default function RadioGroup({
               disabled={option.disabled}
               checked={selectedOption === option.id}
               onChange={() => onChange(option.id)}
-              className="peer h-[20px] w-[20px] cursor-pointer appearance-none rounded-full border-2 border-green-500 bg-transparent transition-all duration-200 checked:border-green-500 checked:bg-green-500 focus:ring-2 focus:ring-green-300 focus:ring-offset-1 disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-slate-200 disabled:opacity-50"
+              className="text-foreground peer h-[20px] w-[20px] cursor-pointer appearance-none rounded-full border-2 border-green-500 bg-transparent transition-all duration-200 checked:border-green-500 checked:bg-green-500 focus:ring-2 focus:ring-green-300 focus:ring-offset-1 disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-slate-200 disabled:opacity-50"
             />
 
             <svg

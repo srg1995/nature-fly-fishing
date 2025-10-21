@@ -24,7 +24,7 @@ export default function InputText({
 }: InputTextProps): JSX.Element {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-tertiary text-sm font-semibold">
+      <label htmlFor={id} className="text-foreground text-sm font-semibold">
         {label}
       </label>
       <input

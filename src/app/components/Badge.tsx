@@ -15,7 +15,9 @@ export default function Badge({
       className={`flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg pr-4 pl-4 transition hover:scale-105 ${!active ? "bg-secondary" : "bg-accent"}`}
       onClick={handleBadgeClick}
     >
-      <p className="text-primary text-sm leading-normal font-medium">#{text}</p>
+      <p className="text-tertiary text-sm leading-normal font-medium">
+        #{text}
+      </p>
     </div>
   );
 }

@@ -78,7 +78,6 @@ export default function Products({
   return (
     <div className="layout-container flex h-full grow flex-col">
       <div className="relative flex flex-1 justify-center gap-1 px-6 py-5">
-        {/* ------------------- FILTROS MOBILE ------------------- */}
         <button
           className="bg-accent fixed right-4 bottom-4 z-50 rounded-full p-4 text-white shadow-lg md:hidden"
           onClick={() => setFiltersOpen((prev) => !prev)}
@@ -109,56 +108,54 @@ export default function Products({
         ></div>
 
         <div
-          className={`fixed top-0 left-0 z-50 h-full w-72 transform bg-white shadow-xl transition-transform duration-300 md:hidden ${
+          className={`bg-background text-tertiary fixed top-0 left-0 z-50 h-full w-72 transform shadow-xl transition-transform duration-300 md:hidden ${
             filtersOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between border-b p-4">
-            <h2 className="text-lg font-bold">Filtros</h2>
+          <div className="border-secondary flex items-center justify-between border-b p-4">
+            <h2 className="text-foreground text-lg font-bold">Filtros</h2>
             <button
-              className="text-gray-500 hover:text-gray-700"
+              className="text-tertiary/80 hover:text-tertiary text-2xl font-bold transition-transform hover:scale-110"
               onClick={() => setFiltersOpen(false)}
             >
               ×
             </button>
           </div>
 
-          <div className="flex flex-col gap-4 p-4">
-            <h3 className="text-primary text-lg font-bold">Tipo de Mosca</h3>
+          <div className="text-tertiary flex flex-col gap-4 p-4">
+            <h3 className="text-foreground text-lg font-bold">Tipo de Mosca</h3>
             <CheckboxGroup
               filters={categoriesData}
               onChangeFilters={setCategoriesData}
             />
 
-            <h3 className="text-primary text-lg font-bold">Tamaño</h3>
+            <h3 className="text-foreground text-lg font-bold">Tamaño</h3>
             <BadgeGroup filters={sizesData} onChangeFilters={setSizesData} />
 
-            <h3 className="text-primary text-lg font-bold">Precio</h3>
+            <h3 className="text-foreground text-lg font-bold">Precio</h3>
             <Range filters={maxPrice} />
 
             <ButtonSecondary text="Limpiar Filtros" onClick={cleanFilters} />
           </div>
         </div>
 
-        {/* ------------------- FILTROS DESKTOP ------------------- */}
         <div className="hidden w-80 flex-col gap-4 px-4 md:flex">
-          <h3 className="text-primary text-lg font-bold">Filtrar</h3>
-          <h3 className="text-primary text-lg font-bold">Tipo de Mosca</h3>
+          <h3 className="text-foreground text-lg font-bold">Filtrar</h3>
+          <h3 className="text-foreground text-lg font-bold">Tipo de Mosca</h3>
           <CheckboxGroup
             filters={categoriesData}
             onChangeFilters={setCategoriesData}
           />
-          <h3 className="text-primary text-lg font-bold">Tamaño</h3>
+          <h3 className="text-foreground text-lg font-bold">Tamaño</h3>
           <BadgeGroup filters={sizesData} onChangeFilters={setSizesData} />
-          <h3 className="text-primary text-lg font-bold">Precio</h3>
+          <h3 className="text-foreground text-lg font-bold">Precio</h3>
           <Range filters={maxPrice} />
           <ButtonSecondary text="Limpiar Filtros" onClick={cleanFilters} />
         </div>
 
-        {/* ------------------- PRODUCTOS ------------------- */}
         <div className="layout-content-container flex max-w-[960px] flex-1 flex-col">
           <div className="flex flex-wrap justify-between gap-3 p-4">
-            <p className="tracking-light text-primary min-w-72 text-[32px] leading-tight font-bold">
+            <p className="tracking-light min-w-72 text-[32px] leading-tight font-bold">
               Moscas, Ninfas y Ahogadas
             </p>
           </div>
