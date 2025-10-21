@@ -1,4 +1,5 @@
-export interface RadioGroupPaymentOption {
-  id: string;
+export interface RadioGroupOption {
+  id: number;
   label: string;
+  disabled?: boolean;
 }

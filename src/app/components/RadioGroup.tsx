@@ -1,14 +1,20 @@
 "use client";
 import React, { JSX, useState } from "react";
-import { RadioGroupPaymentOption } from "../models/form";
+import { RadioGroupOption } from "../models/form";
 
 interface RadioGroupProps {
-  options: RadioGroupPaymentOption[];
+  options: RadioGroupOption[];
+  children?: React.ReactNode;
+  selectedOption?: number;
+  onChange: (id: number) => void;
 }
 
-export default function RadioGroup({ options }: RadioGroupProps): JSX.Element {
-  const [selected, setSelected] = useState<string>(options[0].id);
-
+export default function RadioGroup({
+  options,
+  children,
+  selectedOption,
+  onChange,
+}: RadioGroupProps): JSX.Element {
   return (
     <div className="col-span-3 flex flex-col gap-3 p-4">
       {options.map((option) => (
@@ -21,9 +27,10 @@ export default function RadioGroup({ options }: RadioGroupProps): JSX.Element {
               type="radio"
               name="payment"
               value={option.id}
-              checked={selected === option.id}
-              onChange={() => setSelected(option.id)}
-              className="peer h-[20px] w-[20px] cursor-pointer appearance-none rounded-full border-2 border-green-500 bg-transparent transition-all duration-200 checked:border-green-500 checked:bg-green-500 focus:ring-2 focus:ring-green-300 focus:ring-offset-1"
+              disabled={option.disabled}
+              checked={selectedOption === option.id}
+              onChange={() => onChange(option.id)}
+              className="peer h-[20px] w-[20px] cursor-pointer appearance-none rounded-full border-2 border-green-500 bg-transparent transition-all duration-200 checked:border-green-500 checked:bg-green-500 focus:ring-2 focus:ring-green-300 focus:ring-offset-1 disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-slate-200 disabled:opacity-50"
             />
 
             <svg
@@ -46,9 +53,7 @@ export default function RadioGroup({ options }: RadioGroupProps): JSX.Element {
         </label>
       ))}
 
-      <p className="mt-4 text-sm text-gray-700">
-        Método seleccionado: <strong>{selected}</strong>
-      </p>
+      {children}
     </div>
   );
 }

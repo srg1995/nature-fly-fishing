@@ -1,23 +1,23 @@
+"use client";
 import InputText from "@/app/components/InputText";
 import RadioGroup from "@/app/components/RadioGroup";
-import { RadioGroupPaymentOption } from "@/app/models/form";
-import React from "react";
+import { RadioGroupOption } from "@/app/models/form";
+import React, { useState } from "react";
 
 export default function MethodForm() {
-  const paymentOptions: RadioGroupPaymentOption[] = [
-    { id: "bizum", label: "Bizum" },
-    { id: "paypal", label: "PayPal" },
-    { id: "card", label: "Tarjeta de Crédito/Débito" },
+  const paymentOptions: RadioGroupOption[] = [
+    { id: 0, label: "Bizum" },
+    { id: 1, label: "PayPal" },
+    { id: 2, label: "Tarjeta de Crédito/Débito", disabled: true },
   ];
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<number>(1);
+
   return (
     <div className="grid grid-cols-3 gap-4 p-8">
-      <RadioGroup options={paymentOptions} />
-      <InputText label="Número de Tarjeta" placeholder="Tu número de tarjeta" />
-      <InputText label="Fecha de Expiración" placeholder="MM/AA" />
-      <InputText label="CVC" placeholder="CVC" />
-      <InputText
-        label="Nombre en la Tarjeta"
-        placeholder="Nombre como aparece en la tarjeta"
+      <RadioGroup
+        options={paymentOptions}
+        selectedOption={selectedPaymentMethod}
+        onChange={setSelectedPaymentMethod}
       />
 
       <div className="col-span-3 mt-4 flex justify-center">
