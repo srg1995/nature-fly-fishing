@@ -2,6 +2,7 @@ import React, { JSX } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 interface InputTextProps {
+  id: string;
   label: string;
   placeholder?: string;
   type?: string;
@@ -12,6 +13,7 @@ interface InputTextProps {
 }
 
 export default function InputText({
+  id,
   label,
   placeholder = "",
   type = "text",
@@ -22,12 +24,12 @@ export default function InputText({
 }: InputTextProps): JSX.Element {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={label} className="text-tertiary text-sm font-semibold">
+      <label htmlFor={id} className="text-tertiary text-sm font-semibold">
         {label}
       </label>
       <input
+        id={id}
         type={type}
-        id={label}
         placeholder={placeholder}
         className={`form-input text-tertiary placeholder:text-tertiary flex w-full min-w-0 flex-1 rounded-lg border px-4 py-2 text-base leading-normal focus:outline-none ${
           error

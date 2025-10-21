@@ -77,6 +77,7 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
               className="flex flex-col gap-3"
             >
               <InputText
+                id="email"
                 label="Correo electrónico"
                 type="email"
                 register={register("email")}
@@ -84,6 +85,7 @@ export default function LoginModal({ onClose }: LoginModalProps): JSX.Element {
               />
 
               <InputText
+                id="password"
                 label="Contraseña"
                 type="password"
                 register={register("password")}
