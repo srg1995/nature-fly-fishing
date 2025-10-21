@@ -3,6 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { JSX } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import InputText from "@/app/components/InputText";
+import Textarea from "@/app/components/Textarea";
 
 const schema = z.object({
   name: z.string().min(4, "El nombre debe tener al menos 4 caracteres"),
@@ -23,127 +25,83 @@ export default function Contact(): JSX.Element {
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    mode: "onBlur",
   });
-  const [messageCharacters, setMessageCharacters] = React.useState(0);
 
   const onSubmit = async (data: FormData) => {
     await new Promise((res) => setTimeout(res, 300));
-
     const body = encodeURIComponent(
       `Hola mi nombre es ${data.name} y tengo la siguiente consulta:\n\n${data.message}`,
     );
-
     window.location.href = `mailto:contacto@natureflyfishing.com?subject=${data.subject}&body=${body}`;
-    setMessageCharacters(0);
     reset();
   };
 
   return (
-    <div className="group/design-root relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-      <div className="layout-container flex h-full grow flex-col">
-        <div className="flex flex-1 justify-center px-40 py-5">
-          <div className="layout-content-container flex max-w-[960px] flex-1 flex-col">
-            <div className="flex flex-wrap justify-between gap-3 p-4">
-              <p className="tracking-light text-primary min-w-72 text-[32px] leading-tight font-bold">
-                Contáctanos
-              </p>
-            </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                <div className="flex min-w-40 flex-1 flex-col">
-                  <label className="text-primary pb-2 text-base leading-normal font-semibold">
-                    Nombre
-                  </label>
-                  <input
-                    placeholder="Tu nombre"
-                    id="name"
-                    {...register("name")}
-                    className="form-input text-tertiary placeholder:text-tertiary border-accent focus:border-accent flex h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border p-[15px] text-base leading-normal font-normal focus:ring-0 focus:outline-0"
-                  />
-                  {errors.name && (
-                    <span
-                      className="text-xs text-red-500"
-                      aria-invalid={!!errors.name}
-                    >
-                      {errors.name.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                <div className="flex min-w-40 flex-1 flex-col">
-                  <label className="text-primary pb-2 text-base leading-normal font-semibold">
-                    Asunto
-                  </label>
-                  <input
-                    id="subject"
-                    placeholder="Asunto de tu consulta"
-                    {...register("subject")}
-                    className="form-input text-tertiary placeholder:text-tertiary border-accent focus:border-accent flex h-14 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border p-[15px] text-base leading-normal font-normal focus:ring-0 focus:outline-0"
-                  />
-                  {errors.subject && (
-                    <span
-                      className="text-xs text-red-500"
-                      aria-invalid={!!errors.subject}
-                    >
-                      {errors.subject.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                <div className="flex min-w-40 flex-1 flex-col">
-                  <label className="text-primary pb-2 text-base leading-normal font-semibold">
-                    Mensaje
-                  </label>
-                  <textarea
-                    placeholder="Tu mensaje"
-                    id="message"
-                    {...register("message", {
-                      onChange: (e) =>
-                        setMessageCharacters(e.target.value.length),
-                    })}
-                    className="form-input text-tertiary placeholder:text-tertiary border-accent focus:border-accent flex min-h-36 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border p-[15px] text-base leading-normal font-normal focus:ring-0 focus:outline-0"
-                  ></textarea>
-                  <label
-                    htmlFor="message"
-                    className="text-xs"
-                    aria-invalid={!!errors.message}
-                  >
-                    {messageCharacters}/500
-                  </label>
-                  {errors.message && (
-                    <span className="text-xs text-red-500">
-                      {errors.message.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="flex justify-start px-4 py-3">
-                <button
-                  disabled={isSubmitting}
-                  className="text-primary bg-accent flex h-10 max-w-[480px] min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg px-4 text-sm leading-normal font-bold tracking-[0.015em]"
-                  type="submit"
-                >
-                  <span className="truncate">
-                    {isSubmitting ? "Enviando..." : "Enviar"}
-                  </span>
-                </button>
-              </div>
-            </form>
-            <h2 className="text-primary px-4 pt-5 pb-3 text-[22px] leading-tight font-bold tracking-[-0.015em]">
-              Información de contacto
-            </h2>
-            <p className="text-primary px-4 pt-1 pb-3 text-base leading-normal font-normal">
-              Correo electrónico:
-              <span className="font-semibold">
-                contacto@natureflyfishing.com
-              </span>
-            </p>
+    <div className="relative flex min-h-screen w-full flex-col">
+      <div className="flex flex-col items-center px-4 py-12 sm:px-6 lg:px-8">
+        <h1 className="mb-4 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          Contáctanos
+        </h1>
+        <p className="mb-8 max-w-xl text-center text-gray-600">
+          ¿Tienes alguna pregunta o necesitas asistencia? Completa el formulario
+          y nos pondremos en contacto contigo lo antes posible.
+        </p>
 
-            <div className="flex px-4 py-3">
-              <div className="aspect-video w-full rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat object-cover"></div>
-            </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-3xl space-y-4 rounded-xl p-6 sm:p-10"
+        >
+          <InputText
+            label="Nombre"
+            placeholder="Tu nombre"
+            id="name"
+            register={register("name")}
+            error={errors.name?.message}
+          />
+          <InputText
+            label="Asunto"
+            placeholder="Asunto de tu consulta"
+            id="subject"
+            register={register("subject")}
+            error={errors.subject?.message}
+          />
+          <Textarea
+            label="Mensaje"
+            placeholder="Tu mensaje"
+            id="message"
+            register={register("message")}
+            error={errors.message?.message}
+          />
+
+          <div className="mt-4 flex justify-end">
+            <button
+              disabled={isSubmitting}
+              type="submit"
+              className="transform rounded-lg bg-green-500 px-6 py-3 font-bold text-white shadow-md transition hover:-translate-y-1 hover:bg-green-600 disabled:opacity-50"
+            >
+              {isSubmitting ? "Enviando..." : "Enviar"}
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-10 w-full max-w-3xl space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900">
+            Información de contacto
+          </h2>
+          <p className="text-gray-700">
+            Correo electrónico:{" "}
+            <span className="font-semibold text-gray-900">
+              contacto@natureflyfishing.com
+            </span>
+          </p>
+
+          <div className="w-full overflow-hidden rounded-lg shadow-lg">
+            <img
+              src="/images/bg-header.png"
+              alt="Pesca con mosca"
+              className="h-64 w-full object-cover"
+            />
           </div>
         </div>
       </div>
