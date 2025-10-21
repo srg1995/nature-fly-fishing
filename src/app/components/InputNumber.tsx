@@ -1,4 +1,3 @@
-import { on } from "events";
 import React, { JSX } from "react";
 
 interface InputTextProps {

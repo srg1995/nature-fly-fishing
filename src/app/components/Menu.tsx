@@ -13,7 +13,6 @@ export default function Menu(): JSX.Element {
   return (
     <header className="border-b-secondary bg-background/80 sticky top-0 z-50 border-b px-6 py-3 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between">
-        {/* Logo */}
         <div className="text-primary flex items-center gap-3">
           <div className="size-5">
             <svg
@@ -30,7 +29,6 @@ export default function Menu(): JSX.Element {
           <LinkPrimary href="/" text="Nature Fly Fishing" />
         </div>
 
-        {/* Desktop menu */}
         <div className="hidden flex-1 justify-end gap-8 md:flex">
           <nav className="flex items-center gap-8">
             <LinkPrimary href="/" text="Inicio" />
@@ -64,7 +62,6 @@ export default function Menu(): JSX.Element {
           </div>
         </div>
 
-        {/* Mobile menu button */}
         <div className="md:hidden">
           <div className="flex items-center gap-2">
             <ButtonSecondary
@@ -132,7 +129,6 @@ export default function Menu(): JSX.Element {
         </div>
       </div>
 
-      {/* Mobile dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
