@@ -32,7 +32,9 @@ export default function RootLayout({
       >
         <UserContextProvider>
           <Menu />
-          <div className="flex-grow">{children}</div>
+          <div className="flex-grow">
+            <div className="mx-auto max-w-[1280px] p-4">{children}</div>
+          </div>
           <Footer />
         </UserContextProvider>
       </body>

@@ -77,7 +77,7 @@ export default function Products({
 
   return (
     <div className="layout-container flex h-full grow flex-col">
-      <div className="relative flex flex-1 justify-center gap-1 px-6 py-5">
+      <div className="relative flex flex-1 justify-center gap-1">
         <button
           className="bg-accent fixed right-4 bottom-4 z-50 rounded-full p-4 text-white shadow-lg md:hidden"
           onClick={() => setFiltersOpen((prev) => !prev)}

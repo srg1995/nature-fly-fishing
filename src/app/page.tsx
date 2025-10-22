@@ -22,8 +22,8 @@ export default function Home(): JSX.Element {
   return (
     <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
       <div className="flex flex-1 flex-col">
-        <section className="flex justify-center px-4 py-5 sm:px-8 md:px-16 lg:px-40">
-          <div className="flex w-full max-w-[960px] flex-col">
+        <section className="flex justify-center px-4 py-5 sm:px-8 md:px-16 xl:px-30">
+          <div className="flex w-full flex-col">
             <div className="flex min-h-[400px] flex-col items-center justify-center gap-6 rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat p-6 text-center sm:p-8 md:p-12">
               <h1 className="text-3xl leading-tight font-black text-white sm:text-4xl md:text-5xl">
                 Equípate para tu próxima aventura
@@ -42,14 +42,14 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        <section className="px-4 sm:px-8 md:px-16 lg:px-40">
+        <section className="px-4 sm:px-8 md:px-16 xl:px-30">
           <h2 className="text-primary pt-5 pb-3 text-xl font-bold sm:text-2xl">
             Productos destacados
           </h2>
 
           <div className="mx-auto grid max-w-xl gap-4 sm:grid-cols-1 lg:max-w-max lg:grid-cols-3">
             {products.map((item, i) => (
-              <div key={i} className="flex flex-col gap-3 rounded-lg p-3">
+              <div key={i} className="flex flex-col gap-3 rounded-lg">
                 <div className="aspect-video w-full rounded-lg bg-[url('/images/section.png')] bg-cover bg-center" />
                 <div>
                   <p className="text-primary truncate text-base font-medium">
@@ -62,7 +62,7 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        <section className="px-4 sm:px-8 md:px-16 lg:px-40">
+        <section className="px-4 sm:px-8 md:px-16 xl:px-30">
           <h2 className="text-primary pt-6 pb-3 text-xl font-bold sm:text-2xl">
             Novedades
           </h2>
