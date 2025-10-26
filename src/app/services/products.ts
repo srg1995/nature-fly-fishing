@@ -27,7 +27,9 @@ export const getProductById = async (id: number) => {
       `
     *,
     category:categories(*),
-    product_sizes:product_sizes(*, size:sizes(*))
+    product_sizes:product_sizes(*, size:sizes(*)),
+    images:product_images(*)
+
   `,
     )
     .eq("id", id)
