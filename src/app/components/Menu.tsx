@@ -5,6 +5,8 @@ import LinkPrimary from "@/app/components/LinkPrimary";
 import LinkButton from "@/app/components/LinkButton";
 import LoginModal from "@/app/components/login";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { IconLogo } from "./Icons";
 
 export default function Menu(): JSX.Element {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -15,16 +17,7 @@ export default function Menu(): JSX.Element {
       <div className="mx-auto flex max-w-[1280px] items-center justify-between">
         <div className="text-primary flex items-center gap-3">
           <div className="size-5">
-            <svg
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
-                fill="currentColor"
-              />
-            </svg>
+            <IconLogo />
           </div>
           <LinkPrimary href="/" text="Nature Fly Fishing" />
         </div>
