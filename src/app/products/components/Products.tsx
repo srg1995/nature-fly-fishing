@@ -43,7 +43,7 @@ export default function Products({
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   const maxPrice = useMemo(
-    () => Math.max(...products.map((p) => p.price)),
+    () => Math.max(...products.map((p) => p.price_base)),
     [products],
   );
 

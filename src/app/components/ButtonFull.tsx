@@ -11,7 +11,7 @@ export default function ButtonFull({
 }: ButtonFullProps): JSX.Element {
   return (
     <button
-      className="text-primary bg-accent hover:bg-accent flex w-full cursor-pointer flex-row-reverse items-center justify-center overflow-hidden rounded-lg px-4 py-2 text-sm leading-normal font-semibold transition hover:scale-105"
+      className="bg-accent text-primary hover:bg-accent/90 active:ring-primary flex w-full cursor-pointer flex-row-reverse items-center justify-center overflow-hidden rounded-lg px-4 py-2 text-sm leading-normal font-semibold transition-all duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
       onClick={onClick}
       disabled={disabled}
     >

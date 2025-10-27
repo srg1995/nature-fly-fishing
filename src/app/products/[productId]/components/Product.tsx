@@ -6,6 +6,7 @@ import ButtonFull from "@/app/components/ButtonFull";
 import InputNumber from "@/app/components/InputNumber";
 import Select from "@/app/components/Select";
 import { useUserContext } from "@/app/context/userContext";
+import Toast from "@/app/components/Toast";
 
 interface ProductImage {
   type: "Full" | "R" | "L" | "F" | "B";
@@ -21,6 +22,10 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
   const [selectedSize, setSelectedSize] = useState(
     product?.product_sizes[0]?.size.id || 0,
   );
+  const [price, setPrice] = useState<number>(
+    product?.product_sizes[0]?.price || 0,
+  );
+  const [showToast, setShowToast] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
   // Imagen principal que se muestra
@@ -33,6 +38,9 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
 
   const handleSizeChange = (value: number) => {
     setSelectedSize(value);
+    setPrice(
+      product.product_sizes.find((ps) => ps.size.id === value)?.price || 0,
+    );
     setQuantity(1);
   };
 
@@ -70,12 +78,20 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
         },
       ]);
     }
+    setShowToast(true);
 
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
   };
 
   return (
     <>
+      {showToast && (
+        <Toast
+          message="✅ Producto añadido al carrito"
+          duration={2000}
+          onClose={() => setShowToast(false)}
+        />
+      )}
       <div className="mx-auto flex max-w-6xl flex-col gap-8 p-4 sm:p-6 md:flex-row">
         <div className="flex flex-1 flex-col items-center justify-center">
           <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-2xl shadow-md">
@@ -84,7 +100,7 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
               alt={product?.name || "Producto"}
               fill
               style={{ objectFit: "cover" }}
-              className="transition-transform duration-500 hover:scale-105"
+              className="transition-transform duration-500 hover:scale-150"
             />
           </div>
 
@@ -110,7 +126,7 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
 
         <div className="flex flex-1 flex-col justify-center gap-5">
           <div>
-            <h1 className="text-primary text-2xl font-bold sm:text-3xl md:text-4xl">
+            <h1 className="text-primary text-center text-2xl font-bold sm:text-3xl md:text-4xl">
               {product?.name}
             </h1>
             <p className="mt-2 text-sm leading-relaxed text-gray-600 sm:text-base">
@@ -119,7 +135,7 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
           </div>
 
           <p className="text-tertiary text-2xl font-semibold">
-            {product?.price.toFixed(2)} €
+            {price.toFixed(2)} €
           </p>
 
           <div className="flex flex-col gap-2">
