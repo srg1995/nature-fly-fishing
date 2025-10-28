@@ -25,7 +25,7 @@ export default function Items({ data }: ProductProps): JSX.Element {
               style={{ objectFit: "cover" }}
               src={product?.image_url || "/images/fly.png"}
               alt={product.description}
-              className="transition-transform duration-500 group-hover:scale-105 md:group-hover:scale-105"
+              className="transition-transform duration-500"
             />
           </div>
 
@@ -35,7 +35,7 @@ export default function Items({ data }: ProductProps): JSX.Element {
             </h3>
 
             <p className="text-tertiary text-xl leading-normal font-bold">
-              Desde {product.price_base} €
+              A partir de {product.price_base}€
             </p>
           </div>
 
@@ -44,7 +44,7 @@ export default function Items({ data }: ProductProps): JSX.Element {
               {product.name}
             </h3>
             <p className="text-tertiary text-base font-bold">
-              Desde {product.price_base} €
+              Desde {product.price_base}€
             </p>
           </div>
         </div>

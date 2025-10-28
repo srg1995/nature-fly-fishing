@@ -163,10 +163,16 @@ export default function Products({
             <Select options={options} />
           </div>
 
-          <Suspense fallback={<Skeleton />}>
-            <Items data={productsData} />
-          </Suspense>
-          <Pagination totalPages={1} currentPage={1} onPageChange={() => {}} />
+          <div className="px-4 py-3">
+            <Suspense fallback={<Skeleton />}>
+              <Items data={productsData} />
+            </Suspense>
+            <Pagination
+              totalPages={1}
+              currentPage={1}
+              onPageChange={() => {}}
+            />
+          </div>
         </div>
       </div>
     </div>

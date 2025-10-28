@@ -13,7 +13,7 @@ export function IconLogo(): JSX.Element {
       >
         <g
           transform="translate(0.000000,408.000000) scale(0.100000,-0.100000)"
-          fill="#000000"
+          fill="#51946c"
           stroke="none"
         >
           <path

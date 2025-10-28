@@ -18,7 +18,7 @@ export default function InputNumber({
 }: InputTextProps): JSX.Element {
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={label} className="text-primary text-sm font-medium">
+      <label htmlFor={label} className="text-foreground text-sm font-medium">
         {label}
       </label>
       <input
@@ -28,7 +28,7 @@ export default function InputNumber({
         value={value}
         min={min}
         max={max}
-        className="focus:ring-primary focus:border-primary w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 transition focus:ring-2 focus:outline-none"
+        className="form-input text-tertiary placeholder:text-tertiary flex w-full min-w-0 flex-1 rounded-lg border px-4 py-2 text-base leading-normal focus:outline-none"
         placeholder={placeholder}
         onChange={(e) => onChange?.(parseInt(e.target.value))}
       />

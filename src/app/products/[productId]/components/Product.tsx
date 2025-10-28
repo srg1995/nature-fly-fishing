@@ -7,6 +7,8 @@ import InputNumber from "@/app/components/InputNumber";
 import Select from "@/app/components/Select";
 import { useUserContext } from "@/app/context/userContext";
 import Toast from "@/app/components/Toast";
+import LinkPrimary from "@/app/components/LinkPrimary";
+import { s } from "framer-motion/client";
 
 interface ProductImage {
   type: "Full" | "R" | "L" | "F" | "B";
@@ -26,6 +28,10 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
     product?.product_sizes[0]?.price || 0,
   );
   const [showToast, setShowToast] = useState(false);
+  const [messageToast, setMessageToast] = useState("");
+  const [typeToast, setTypeToast] = useState<"success" | "info" | "error">(
+    "success",
+  );
   const [quantity, setQuantity] = useState(1);
 
   // Imagen principal que se muestra
@@ -34,7 +40,9 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
       "/placeholder.png",
   );
 
-  const sizeOptions = product?.product_sizes?.filter((s) => s.stock > 0);
+  const sizeOptions = product?.product_sizes
+    ?.filter((s) => s.stock > 0)
+    ?.sort((a, b) => a.size.id - b.size.id);
 
   const handleSizeChange = (value: number) => {
     setSelectedSize(value);
@@ -45,13 +53,14 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
   };
 
   const handleQuantityChange = (value: number) => {
-    const maxStock =
-      product?.product_sizes.find((s) => s.size.id === selectedSize)?.stock ||
-      1;
+    // const maxStock =
+    //   product?.product_sizes.find((s) => s.size.id === selectedSize)?.stock ||
+    //   1;
+    const maxStock = 10;
     setQuantity(Math.min(Math.max(value, 1), maxStock));
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const sizeProduct =
       product?.product_sizes.find((s) => s.size.id === selectedSize)?.size
         .label || "";
@@ -65,10 +74,18 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
 
     if (existingIndex >= 0) {
       const updatedCart = [...shoppingCart];
-      updatedCart[existingIndex].quantity += quantity;
+      //quiero que compruebe que no tenga mas de 10 unidades
+      if (updatedCart[existingIndex].quantity + quantity > 10) {
+        updatedCart[existingIndex].quantity = 10;
+        handleToast("Máximo 10 unidades por producto", "info");
+      } else {
+        updatedCart[existingIndex].quantity += quantity;
+        handleToast("Producto añadido al carrito", "success");
+      }
       setShoppingCart(updatedCart);
+      localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
     } else {
-      setShoppingCart([
+      const newCartItem = [
         ...shoppingCart,
         {
           product: product?.name || "",
@@ -76,19 +93,26 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
           quantity,
           price: priceProduct,
         },
-      ]);
+      ];
+      setShoppingCart(newCartItem);
+      handleToast("Producto añadido al carrito", "success");
+      localStorage.setItem("shoppingCart", JSON.stringify(newCartItem));
     }
-    setShowToast(true);
+  };
 
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+  const handleToast = (message: string, type: "success" | "info" | "error") => {
+    setMessageToast(message);
+    setTypeToast(type);
+    setShowToast(true);
   };
 
   return (
     <>
       {showToast && (
         <Toast
-          message="✅ Producto añadido al carrito"
+          message={messageToast}
           duration={2000}
+          type={typeToast}
           onClose={() => setShowToast(false)}
         />
       )}
@@ -138,30 +162,31 @@ export default function ProductItem({ product }: ProductProps): JSX.Element {
             {price.toFixed(2)} €
           </p>
 
-          <div className="flex flex-col gap-2">
-            <label className="text-primary text-sm font-medium">Tamaño</label>
-            <Select onChange={handleSizeChange}>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Select onChange={handleSizeChange} label="Tamaño">
               {sizeOptions &&
                 sizeOptions.map((s) => (
                   <option key={s.id} value={s.size.id}>
-                    {s.size.label} ({s.stock} disponibles)
+                    {s.size.label} (Max. 10 uds)
                   </option>
                 ))}
             </Select>
-          </div>
 
-          <div className="flex flex-col gap-2">
             <InputNumber
               label="Cantidad"
               value={quantity.toString()}
               onChange={handleQuantityChange}
               min={1}
               max={
-                sizeOptions?.find((s) => s.size.id === selectedSize)?.stock || 1
+                10
+                //sizeOptions?.find((s) => s.size.id === selectedSize)?.stock || 1
               }
             />
           </div>
-
+          <div className="text-tertiary text-xs">
+            *Maximo 10 unidades por Tamaño, para compras al por mayor{" "}
+            <LinkPrimary href="/contact" text="contacta con nosotros" />.
+          </div>
           <div className="mt-4">
             <ButtonFull
               onClick={handleAddToCart}
