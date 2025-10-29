@@ -16,7 +16,7 @@ export default function Items({ data }: ProductProps): JSX.Element {
       {data?.map((product) => (
         <div
           key={product.id}
-          className="group relative cursor-pointer overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-xl"
+          className="group bg-tertiary/50 relative cursor-pointer overflow-hidden rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-xl"
           onClick={() => router.push(`/products/${product.id}`)}
         >
           <div className="relative aspect-square w-full">
@@ -24,7 +24,7 @@ export default function Items({ data }: ProductProps): JSX.Element {
               fill
               style={{ objectFit: "cover" }}
               src={product?.image_url || "/images/fly.png"}
-              alt={product.description}
+              alt={product.name}
               className="transition-transform duration-500"
             />
           </div>

@@ -8,7 +8,6 @@ import Select from "@/app/components/Select";
 import { useUserContext } from "@/app/context/userContext";
 import Toast from "@/app/components/Toast";
 import LinkPrimary from "@/app/components/LinkPrimary";
-import { s } from "framer-motion/client";
 
 interface ProductImage {
   type: "Full" | "R" | "L" | "F" | "B";
