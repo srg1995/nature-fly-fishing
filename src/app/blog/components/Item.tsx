@@ -19,7 +19,7 @@ export default function Item({ article }: ItemProps): JSX.Element {
           </div>
           <ButtonSecondary text="Leer más" />
         </div>
-        <div className="aspect-video w-full flex-1 rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat"></div>
+        <div className="aspect-video w-full flex-1 rounded-lg bg-[url('/images/bg-header.jpg')] bg-cover bg-center bg-no-repeat"></div>
       </div>
     </div>
   );
