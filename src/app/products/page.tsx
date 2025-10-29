@@ -1,6 +1,10 @@
 import React, { JSX, use } from "react";
 import { getCategories, getProducts, getSizes } from "@/app/services/products";
 import Products from "@/app/products/components/Products";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Tienda",
+};
 
 export default function Articles(): JSX.Element {
   const products = use(getProducts());

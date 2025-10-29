@@ -24,7 +24,7 @@ export default function Home(): JSX.Element {
       <div className="flex flex-1 flex-col">
         <section className="flex justify-center px-4 py-5 sm:px-8 md:px-16 xl:px-30">
           <div className="flex w-full flex-col">
-            <div className="flex min-h-[400px] flex-col items-center justify-center gap-6 rounded-lg bg-[url('/images/bg-header.png')] bg-cover bg-center bg-no-repeat p-6 text-center sm:p-8 md:p-12">
+            <div className="flex min-h-[400px] flex-col items-center justify-center gap-6 rounded-lg bg-[url('/images/bg-header.jpg')] bg-cover bg-center bg-no-repeat p-6 text-center sm:p-8 md:p-12">
               <h1 className="text-3xl leading-tight font-black text-white sm:text-4xl md:text-5xl">
                 Equípate para tu próxima aventura
               </h1>
@@ -50,7 +50,7 @@ export default function Home(): JSX.Element {
           <div className="mx-auto grid max-w-xl gap-4 sm:grid-cols-1 lg:max-w-max lg:grid-cols-3">
             {products.map((item, i) => (
               <div key={i} className="flex flex-col gap-3 rounded-lg">
-                <div className="aspect-video w-full rounded-lg bg-[url('/images/section.png')] bg-cover bg-center" />
+                <div className="aspect-video w-full rounded-lg bg-[url('/images/section.jpg')] bg-cover bg-center" />
                 <div>
                   <p className="text-primary truncate text-base font-medium">
                     {item.title}
@@ -81,7 +81,7 @@ export default function Home(): JSX.Element {
                 <ButtonPrimary text="Ver colección" />
               </div>
             </div>
-            <div className="aspect-video rounded-lg bg-[url('/images/fly.png')] bg-cover bg-center md:w-1/2" />
+            <div className="aspect-video rounded-lg bg-[url('/images/fly.jpg')] bg-cover bg-center md:w-1/2" />
           </div>
 
           <div className="mt-6 flex flex-col items-stretch gap-4 rounded-lg p-4 md:flex-row">
@@ -98,7 +98,7 @@ export default function Home(): JSX.Element {
                 <ButtonSecondary text="Leer artículo" />
               </div>
             </div>
-            <div className="aspect-video rounded-lg bg-[url('/images/fly.png')] bg-cover bg-center md:w-1/2" />
+            <div className="aspect-video rounded-lg bg-[url('/images/fly.jpg')] bg-cover bg-center md:w-1/2" />
           </div>
         </section>
       </div>

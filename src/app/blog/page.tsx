@@ -1,11 +1,13 @@
 import React, { JSX, use } from "react";
 import InputSearch from "@/app/components/InputSearch";
-
 import Badge from "@/app/components/Badge";
-
 import { getItemsBlog } from "@/app/services/blog";
 import Items from "@/app/blog/components/Items";
 import FeaturedItems from "@/app/blog/components/FeaturedItems";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Blog",
+};
 
 export default function Blog(): JSX.Element {
   const options = ["Todos", "Técnicas", "Noticias", "Consejos", "Experiencias"];
